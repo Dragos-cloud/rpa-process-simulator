@@ -1,0 +1,21 @@
+name: Validate static app
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Compile embedded JavaScript
+        run: >-
+          node -e "const fs=require('fs'); const page=fs.readFileSync('index.html','utf8'); const start=page.indexOf('<script>'); const end=page.indexOf('</script>',start); if(start<0||end<0) throw new Error('Inline script not found'); new Function(page.slice(start+8,end)); console.log('Embedded JavaScript compiles.');"

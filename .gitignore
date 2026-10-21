@@ -1,0 +1,25 @@
+# Browser exports and imported process material can contain operational or client data.
+*.rpaproj.json
+*.xaml
+*.bpmn
+*.docx
+imports/
+exports/
+
+# Local video production, private notes, backups and credentials
+/media/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local tooling and operating-system files
+.vscode/
+.idea/
+node_modules/
+coverage/
+dist/
+*.log
+.DS_Store
+Thumbs.db
