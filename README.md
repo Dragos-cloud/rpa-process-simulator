@@ -69,7 +69,7 @@ This repository intentionally ignores imported workflows, PDDs, BPMN files, gene
 
 ## Quality checks
 
-Run `node --test tests/pdd-parser.test.cjs tests/scenarios.test.cjs` for dependency-free parser and scenario regression tests. The GitHub Actions workflow runs these tests and verifies that the embedded JavaScript compiles. Before releasing, also check both sample processes, human gates, exception recovery, session save/load, and document exports in your target browsers. Test project imports with anonymised fixtures only.
+Run `node --test tests/pdd-parser.test.cjs tests/scenarios.test.cjs tests/guide.test.cjs` for dependency-free parser, scenario and guide-navigation regression tests. The GitHub Actions workflow runs these tests and verifies that the embedded JavaScript compiles. Before releasing, also check both sample processes, human gates, exception recovery, session save/load, document exports and the English/Romanian guide tabs in your target browsers. Test project imports with anonymised fixtures only.
 
 ## PDD structure support
 

@@ -2,6 +2,15 @@
 
 All notable public-facing changes are documented here.
 
+## 0.62 — 2026-10-22
+
+- Replaced the single scrolling User Guide with eight topic tabs in English and Romanian, keeping navigation visible while the selected topic scrolls.
+- Removed the "8. Coming next" section and added the missing Romanian Process Model reference tab.
+- Gave the English/Romanian import-file tables a non-wrapping, minimum-width file-type column so headers and extensions stay readable.
+- Added accessible tab/panel relationships, keyboard navigation with arrows and Home/End, and preserved the selected topic when switching language or returning from the simulator.
+- Scoped simulation shortcuts to the simulator so reading the guide cannot inadvertently play, step or reset it.
+- Added six guide navigation regression tests to the validation workflow.
+
 ## 0.61 — 2026-10-21
 
 - Replaced raw-condition scenario names with route-focus titles and expandable branch explanations, available without an LLM.

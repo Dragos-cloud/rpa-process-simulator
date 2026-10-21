@@ -23,3 +23,5 @@ jobs:
         run: node --test tests/pdd-parser.test.cjs
       - name: Test scenario wording and branch polarity
         run: node --test tests/scenarios.test.cjs
+      - name: Test guide navigation and language parity
+        run: node --test tests/guide.test.cjs

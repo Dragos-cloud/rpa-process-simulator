@@ -240,8 +240,21 @@ input[type=range]{accent-color:var(--accent);width:100px}
 .node.grp rect{fill:#141b24}
 
 /* ---------- guide ---------- */
-.guide{flex:1;min-height:0;width:100%;max-width:860px;margin:0 auto;
-  padding:30px 26px 70px;overflow-y:auto}
+.guide{display:flex;flex-direction:column;flex:1;min-height:0;width:100%;max-width:1120px;
+  margin:0 auto;padding:24px 26px 0;overflow:hidden}
+.guide-header{flex:0 0 auto}
+.guide-header p{margin:0 0 18px}
+.guide-nav{display:flex;flex-wrap:wrap;gap:6px;flex:0 0 auto;padding:0 0 14px;
+  border-bottom:1px solid var(--line)}
+.guide-tab{padding:8px 12px;font-size:12.5px;white-space:nowrap}
+.guide-tab[aria-selected="true"]{color:#06121f;background:var(--accent);
+  border-color:var(--accent);font-weight:600}
+.guide-tab[aria-selected="true"]:hover{background:#68b0ff}
+.guide-tab:focus-visible,.guide-panel:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.guide-content{flex:1;min-height:0;overflow:auto;padding:20px 4px 48px;scrollbar-gutter:stable}
+.guide-panel[hidden]{display:none}
+.guide-panel>:first-child{margin-top:0}
+.guide-panel{max-width:860px;overflow-wrap:anywhere}
 .guide h1{font-size:24px;margin:0 0 6px}
 .guide h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;
   border-bottom:1px solid var(--line)}
@@ -256,6 +269,16 @@ input[type=range]{accent-color:var(--accent);width:100px}
 .guide th,.guide td{border:1px solid var(--line);padding:7px 10px;text-align:left}
 .guide th{background:var(--panel2);color:var(--dim);font-size:11px;
   text-transform:uppercase;letter-spacing:.5px}
+.guide .guide-files th:first-child,.guide .guide-files td:first-child{
+  width:96px;min-width:96px;white-space:nowrap;overflow-wrap:normal;word-break:normal}
+@media(max-width:640px){
+  .guide{padding:16px 12px 0}
+  .guide h1{font-size:20px}
+  .guide-header p{font-size:12px;margin-bottom:12px}
+  .guide-nav{gap:5px;padding-bottom:10px}
+  .guide-tab{padding:7px 9px;font-size:12px}
+  .guide-content{padding-top:16px}
+}
 .note{background:#12212e;border-left:3px solid var(--accent);
   padding:11px 14px;border-radius:0 7px 7px 0;margin:14px 0;font-size:13px}
 .note.warn{background:#241d10;border-left-color:var(--warn)}
@@ -383,8 +406,22 @@ input[type=range]{accent-color:var(--accent);width:100px}
   <!-- ================= GUIDE ================= -->
   <section class="view" id="view-guide"><div class="guide" id="guideBody" data-lang="en">
 
+    <div class="guide-header">
     <h1 id="guideTitleEN">UiPath RPA Project Simulator — User Guide</h1>
     <p style="color:var(--dim)">Version <span id="guideVerEN"></span> · XAML and PDD import · gap report · local LLM</p>
+    </div>
+    <div class="guide-nav" role="tablist" aria-label="User guide topics">
+      <button type="button" class="guide-tab" id="guide-tab-en-start" role="tab" data-guide-topic="start" aria-controls="guide-panel-en-start" aria-selected="true" tabindex="0">Start here</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-import" role="tab" data-guide-topic="import" aria-controls="guide-panel-en-import" aria-selected="false" tabindex="-1">Import &amp; gaps</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-diagram" role="tab" data-guide-topic="diagram" aria-controls="guide-panel-en-diagram" aria-selected="false" tabindex="-1">Diagram</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-human" role="tab" data-guide-topic="human" aria-controls="guide-panel-en-human" aria-selected="false" tabindex="-1">Human steps</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-exceptions" role="tab" data-guide-topic="exceptions" aria-controls="guide-panel-en-exceptions" aria-selected="false" tabindex="-1">Exceptions</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-ai" role="tab" data-guide-topic="ai" aria-controls="guide-panel-en-ai" aria-selected="false" tabindex="-1">Local AI</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-model" role="tab" data-guide-topic="model" aria-controls="guide-panel-en-model" aria-selected="false" tabindex="-1">Model format</button>
+      <button type="button" class="guide-tab" id="guide-tab-en-training" role="tab" data-guide-topic="training" aria-controls="guide-panel-en-training" aria-selected="false" tabindex="-1">Training</button>
+    </div>
+    <div class="guide-content">
+    <section class="guide-panel" id="guide-panel-en-start" data-guide-panel="start" role="tabpanel" aria-labelledby="guide-tab-en-start" tabindex="0">
 
     <div class="note">
       <b>Start with your project.</b> Import UiPath workflows and, optionally, a PDD to
@@ -398,9 +435,29 @@ input[type=range]{accent-color:var(--accent);width:100px}
       inspect workflow relationships and exception handling; stakeholders discuss the process
       and human responsibilities; trainers guide a room through the steps and ask questions.</p>
 
-    <h2>0. Importing a real project</h2>
+    <h2>Getting started in 60 seconds</h2>
+    <ol>
+      <li>Use <b>Import project…</b> to load your UiPath files and optional PDD, review the mappings,
+        then build the simulation. To try the controls first, choose a built-in example from <b>Project</b>.</li>
+      <li>Press <b>Play</b>. The diagram lights up step by step and the timeline on the right
+        narrates what the robot is doing.</li>
+      <li>When an amber <b>Human action required</b> card appears, the robot has stopped and
+        is waiting for you. Click <b>Done — continue</b> to release it.</li>
+      <li>Press <b>Reset</b>, choose something from <b>Inject exception</b>, and play it again.</li>
+      <li>If the process contains decisions that choose between steps (an imported project with <b>◇</b> diamonds), a <b>Scenario</b> selector appears next to it: pick one path and the steps on the other branches are skipped and dimmed. <b>All branches</b> lists every branch in order, as before.</li>
+      <li>On an imported project, <b>✦ Plain names</b> asks the local model to rewrite developer-style step names and raw conditions in plain business language; the <b>Plain names (AI)</b> checkbox switches back to the original names at any time.</li>
+    </ol>
+    <p>Scenario titles identify a route's activity focus. <b>Branch details…</b> explains the selected
+      Boolean assumptions without an LLM, and lets you expand the full source condition and required
+      True/Then or False/Else outcome. Unsupported expressions stay technical. Re-import older sessions
+      if their conditions were already truncated. The walkthrough does not evaluate real runtime data.</p>
+    <p>Keyboard in the Simulator: <code>Space</code> play/pause, <code>→</code> single step, <code>R</code> reset.
+      In this guide, use <code>←</code>/<code>→</code> to switch focused tabs and <code>Home</code>/<code>End</code> for the first/last topic.</p>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-import" data-guide-panel="import" role="tabpanel" aria-labelledby="guide-tab-en-import" tabindex="0" hidden>
+    <h2>Importing a real project</h2>
     <p>Press <b>Import project…</b> and select everything at once:</p>
-    <table>
+    <table class="guide-files">
       <tr><th>File</th><th>What is read from it</th></tr>
       <tr><td><code>.xaml</code></td><td>Activity tree, DisplayNames, annotations, Try/Catch,
         Throw messages, LogMessage text, and InvokeWorkflowFile links between files.</td></tr>
@@ -436,7 +493,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
       <b>Framework steps</b> to expand them when someone asks how retries or queue statuses
       actually work.</p>
 
-    <h2>0b. The gap report</h2>
+    <h2>The gap report</h2>
     <p>The <b>Gaps</b> button appears once a project is imported. It reports:</p>
     <ul>
       <li><b>Exception coverage</b> — every exception thrown in code beside its closest
@@ -460,25 +517,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       measurement, until you have timings from an actual run.
     </div>
 
-    <h2>1. Getting started in 60 seconds</h2>
-    <ol>
-      <li>Use <b>Import project…</b> to load your UiPath files and optional PDD, review the mappings,
-        then build the simulation. To try the controls first, choose a built-in example from <b>Project</b>.</li>
-      <li>Press <b>Play</b>. The diagram lights up step by step and the timeline on the right
-        narrates what the robot is doing.</li>
-      <li>When an amber <b>Human action required</b> card appears, the robot has stopped and
-        is waiting for you. Click <b>Done — continue</b> to release it.</li>
-      <li>Press <b>Reset</b>, choose something from <b>Inject exception</b>, and play it again.</li>
-      <li>If the process contains decisions that choose between steps (an imported project with <b>◇</b> diamonds), a <b>Scenario</b> selector appears next to it: pick one path and the steps on the other branches are skipped and dimmed. <b>All branches</b> lists every branch in order, as before.</li>
-      <li>On an imported project, <b>✦ Plain names</b> asks the local model to rewrite developer-style step names and raw conditions in plain business language; the <b>Plain names (AI)</b> checkbox switches back to the original names at any time.</li>
-    </ol>
-    <p>Scenario titles identify a route's activity focus. <b>Branch details…</b> explains the selected
-      Boolean assumptions without an LLM, and lets you expand the full source condition and required
-      True/Then or False/Else outcome. Unsupported expressions stay technical. Re-import older sessions
-      if their conditions were already truncated. The walkthrough does not evaluate real runtime data.</p>
-    <p>Keyboard: <code>Space</code> play/pause, <code>→</code> single step, <code>R</code> reset.</p>
-
-    <h2>2. Reading the diagram</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-diagram" data-guide-panel="diagram" role="tabpanel" aria-labelledby="guide-tab-en-diagram" tabindex="0" hidden>
+    <h2>Reading the diagram</h2>
     <table>
       <tr><th>Appearance</th><th>Meaning</th></tr>
       <tr><td><span class="lgd" style="background:var(--bot)"></span>Blue stripe</td>
@@ -506,7 +547,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       flips to the left side on its own when it would otherwise cover the step you are
       looking at or the one currently executing.</p>
 
-    <h2>3. Human participation</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-human" data-guide-panel="human" role="tabpanel" aria-labelledby="guide-tab-en-human" tabindex="0" hidden>
+    <h2>Human participation</h2>
     <p>Human steps are first-class citizens in the model, not annotations. A step with
       <code>gate: true</code> stops the run completely and starts a timer. The time you take
       to click through is recorded as <b>Human wait</b> in the statistics bar, alongside
@@ -518,7 +561,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       simulation, let the gate sit open for a moment, and the point makes itself.
     </div>
 
-    <h2>4. Injecting exceptions</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-exceptions" data-guide-panel="exceptions" role="tabpanel" aria-labelledby="guide-tab-en-exceptions" tabindex="0" hidden>
+    <h2>Injecting exceptions</h2>
     <p>Choosing an exception arms it. It fires once, at its trigger step, and the diagram
       redraws to show the handler path before you press play — so you can talk through the
       route with a stakeholder before running it.</p>
@@ -551,7 +596,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
         told (the AP clerk, RPA support, HR) is notified without the robot waiting.</li>
     </ul>
 
-    <h2>5. Local LLM (LM Studio)</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-ai" data-guide-panel="ai" role="tabpanel" aria-labelledby="guide-tab-en-ai" tabindex="0" hidden>
+    <h2>Local LLM (LM Studio)</h2>
     <p>The simulator can call a model running on your own machine to explain steps and brief
       you on a process. AI requests send process context to the endpoint you configure.
       Use a local or otherwise approved endpoint for sensitive process material; a remote
@@ -602,7 +649,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       for a developer produces usefully different answers. Check AI output against the project
       sources; it may be incomplete or incorrect.</p>
 
-    <h2>6. The Process Model format</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-model" data-guide-panel="model" role="tabpanel" aria-labelledby="guide-tab-en-model" tabindex="0" hidden>
+    <h2>The Process Model format</h2>
     <p><b>Load session…</b> and <b>Save session…</b> move process models in and out as JSON.
       The project importers build this same model from the supplied files, within the parser's limits.</p>
 <pre><code>{
@@ -640,7 +689,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       <code>terminal</code> beats <code>resume</code>; and omitting <code>retry</code> means
       the handler runs immediately, which is the correct shape for a business exception.</p>
 
-    <h2>7. Suggested training exercises</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-en-training" data-guide-panel="training" role="tabpanel" aria-labelledby="guide-tab-en-training" tabindex="0" hidden>
+    <h2>Suggested training exercises</h2>
     <ol>
       <li>Run the invoice process clean. Ask the group where the robot is actually saving
         time, then show them the Bot time and Human wait figures.</li>
@@ -657,25 +708,29 @@ input[type=range]{accent-color:var(--accent);width:100px}
         instead of waiting for HR, and who restarts the onboarding afterwards.</li>
     </ol>
 
-    <h2>8. Coming next</h2>
-    <ul>
-      <li><b>Model editor</b> — toggle a step between bot and human, add exceptions by hand,
-        correct anything the parsers get wrong, and save the result back as a model file.</li>
-      <li><b>Confirmed exception pairing</b> — accept or reject the coverage suggestions in
-        the app so the gap report reflects your decisions rather than raw scores.</li>
-      <li><b>Test-case scenarios</b> — the PDD's test cases are already parsed; turning each
-        one into a runnable scenario is a small step from here.</li>
-      <li><b>Timing capture</b> — import Orchestrator job logs to replace estimated durations
-        with measured ones.</li>
-    </ul>
-
+    </section>
+    </div>
   </div>
 
   <!-- ============ ROMANIAN GUIDE ============ -->
   <div class="guide" data-lang="ro" style="display:none">
 
+    <div class="guide-header">
     <h1 id="guideTitleRO">UiPath RPA Project Simulator — Ghid de utilizare</h1>
     <p style="color:var(--dim)">Versiunea <span id="guideVerRO"></span> · import XAML și PDD · raport de diferențe · model LLM local</p>
+    </div>
+    <div class="guide-nav" role="tablist" aria-label="Subiecte din ghidul de utilizare">
+      <button type="button" class="guide-tab" id="guide-tab-ro-start" role="tab" data-guide-topic="start" aria-controls="guide-panel-ro-start" aria-selected="true" tabindex="0">Primii pași</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-import" role="tab" data-guide-topic="import" aria-controls="guide-panel-ro-import" aria-selected="false" tabindex="-1">Import și diferențe</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-diagram" role="tab" data-guide-topic="diagram" aria-controls="guide-panel-ro-diagram" aria-selected="false" tabindex="-1">Diagramă</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-human" role="tab" data-guide-topic="human" aria-controls="guide-panel-ro-human" aria-selected="false" tabindex="-1">Pași umani</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-exceptions" role="tab" data-guide-topic="exceptions" aria-controls="guide-panel-ro-exceptions" aria-selected="false" tabindex="-1">Excepții</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-ai" role="tab" data-guide-topic="ai" aria-controls="guide-panel-ro-ai" aria-selected="false" tabindex="-1">AI local</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-model" role="tab" data-guide-topic="model" aria-controls="guide-panel-ro-model" aria-selected="false" tabindex="-1">Format model</button>
+      <button type="button" class="guide-tab" id="guide-tab-ro-training" role="tab" data-guide-topic="training" aria-controls="guide-panel-ro-training" aria-selected="false" tabindex="-1">Instruire</button>
+    </div>
+    <div class="guide-content">
+    <section class="guide-panel" id="guide-panel-ro-start" data-guide-panel="start" role="tabpanel" aria-labelledby="guide-tab-ro-start" tabindex="0">
 
     <div class="note">
       <b>Începe cu proiectul tău.</b> Importă workflow-uri UiPath și, opțional, un PDD pentru
@@ -689,9 +744,30 @@ input[type=range]{accent-color:var(--accent);width:100px}
       inspectează legături între workflow-uri și tratarea excepțiilor; stakeholderii discută
       procesul și responsabilitățile umane; trainerii ghidează prezentări și întrebări.</p>
 
-    <h2>0. Importul unui proiect real</h2>
+    <h2>Primii pași</h2>
+    <ol>
+      <li>Folosește <b>Importă proiect…</b> pentru fișierele UiPath și PDD-ul opțional, verifică
+        asocierile și construiește simularea. Pentru a încerca mai întâi comenzile, alege un exemplu inclus din <b>Proiect</b>.</li>
+      <li>Apasă <b>Rulează</b>. Diagrama se aprinde pas cu pas, iar cronologia din dreapta
+        povestește ce face robotul.</li>
+      <li>Când apare cardul portocaliu <b>Este necesară intervenția umană</b>, robotul s-a
+        oprit și te așteaptă. Apasă <b>Gata — continuă</b> pentru a-l elibera.</li>
+      <li>Apasă <b>Resetează</b>, alege ceva din <b>Injectează excepție</b> și rulează din nou.</li>
+      <li>Dacă procesul conține decizii care aleg între pași (un proiect importat cu romburi <b>◇</b>), apare un selector <b>Scenariu</b> lângă ea: alege un traseu, iar pașii de pe celelalte ramuri sunt săriți și estompați. <b>Toate ramurile</b> le listează pe toate, în ordine, ca până acum.</li>
+      <li>La un proiect importat, <b>✦ Nume simple</b> cere modelului local să rescrie în limbaj de business numele de pași scrise pentru dezvoltatori și condițiile brute; caseta <b>Nume simple (AI)</b> revine oricând la numele originale.</li>
+    </ol>
+    <p>Titlurile scenariilor indică activitatea relevantă a traseului. <b>Detalii ramuri…</b> explică
+      ipotezele booleene selectate fără LLM și permite extinderea condiției sursă complete cu rezultatul
+      True/Then sau False/Else necesar. Expresiile nesuportate rămân tehnice; reimportă sesiunile vechi cu
+      condiții trunchiate. Prezentarea nu evaluează date reale de rulare.</p>
+    <p>Taste în Simulator: <code>Space</code> rulează/pauză, <code>→</code> un singur pas,
+      <code>R</code> resetare. În ghid, <code>←</code>/<code>→</code> schimbă fila focalizată,
+      iar <code>Home</code>/<code>End</code> aleg primul/ultimul subiect.</p>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-import" data-guide-panel="import" role="tabpanel" aria-labelledby="guide-tab-ro-import" tabindex="0" hidden>
+    <h2>Importul unui proiect real</h2>
     <p>Apasă <b>Importă proiect…</b> și selectează tot deodată:</p>
-    <table>
+    <table class="guide-files">
       <tr><th>Fișier</th><th>Ce se citește din el</th></tr>
       <tr><td><code>.xaml</code></td><td>Arborele de activități, DisplayName, adnotări,
         Try/Catch, mesajele din Throw, textul din LogMessage și legăturile
@@ -729,7 +805,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
       extinde când cineva întreabă cum funcționează efectiv reîncercările sau statusurile din
       coadă.</p>
 
-    <h2>0b. Raportul de diferențe</h2>
+    <h2>Raportul de diferențe</h2>
     <p>Butonul <b>Diferențe</b> apare după importul unui proiect. Raportează:</p>
     <ul>
       <li><b>Acoperirea excepțiilor</b> — fiecare excepție aruncată în cod alături de cea mai
@@ -753,26 +829,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       o formă, nu ca pe o măsurătoare, până ai timpi dintr-o rulare reală.
     </div>
 
-    <h2>1. Primii pași</h2>
-    <ol>
-      <li>Folosește <b>Importă proiect…</b> pentru fișierele UiPath și PDD-ul opțional, verifică
-        asocierile și construiește simularea. Pentru a încerca mai întâi comenzile, alege un exemplu inclus din <b>Proiect</b>.</li>
-      <li>Apasă <b>Rulează</b>. Diagrama se aprinde pas cu pas, iar cronologia din dreapta
-        povestește ce face robotul.</li>
-      <li>Când apare cardul portocaliu <b>Este necesară intervenția umană</b>, robotul s-a
-        oprit și te așteaptă. Apasă <b>Gata — continuă</b> pentru a-l elibera.</li>
-      <li>Apasă <b>Resetează</b>, alege ceva din <b>Injectează excepție</b> și rulează din nou.</li>
-      <li>Dacă procesul conține decizii care aleg între pași (un proiect importat cu romburi <b>◇</b>), apare un selector <b>Scenariu</b> lângă ea: alege un traseu, iar pașii de pe celelalte ramuri sunt săriți și estompați. <b>Toate ramurile</b> le listează pe toate, în ordine, ca până acum.</li>
-      <li>La un proiect importat, <b>✦ Nume simple</b> cere modelului local să rescrie în limbaj de business numele de pași scrise pentru dezvoltatori și condițiile brute; caseta <b>Nume simple (AI)</b> revine oricând la numele originale.</li>
-    </ol>
-    <p>Titlurile scenariilor indică activitatea relevantă a traseului. <b>Detalii ramuri…</b> explică
-      ipotezele booleene selectate fără LLM și permite extinderea condiției sursă complete cu rezultatul
-      True/Then sau False/Else necesar. Expresiile nesuportate rămân tehnice; reimportă sesiunile vechi cu
-      condiții trunchiate. Prezentarea nu evaluează date reale de rulare.</p>
-    <p>Taste: <code>Space</code> rulează/pauză, <code>→</code> un singur pas,
-      <code>R</code> resetare.</p>
-
-    <h2>2. Cum se citește diagrama</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-diagram" data-guide-panel="diagram" role="tabpanel" aria-labelledby="guide-tab-ro-diagram" tabindex="0" hidden>
+    <h2>Cum se citește diagrama</h2>
     <table>
       <tr><th>Aspect</th><th>Semnificație</th></tr>
       <tr><td><span class="lgd" style="background:var(--bot)"></span>Bandă albastră</td>
@@ -800,7 +859,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       greșită pe un monitor extern. Panoul se mută singur în partea stângă atunci când ar
       acoperi pasul selectat sau pe cel aflat în execuție.</p>
 
-    <h2>3. Participarea umană</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-human" data-guide-panel="human" role="tabpanel" aria-labelledby="guide-tab-ro-human" tabindex="0" hidden>
+    <h2>Participarea umană</h2>
     <p>Pașii umani sunt elemente de sine stătătoare în model, nu adnotări. Un pas cu
       <code>gate: true</code> oprește complet rularea și pornește un cronometru. Timpul până
       apeși butonul este înregistrat ca <b>Așteptare om</b> în bara de statistici, alături de
@@ -813,7 +874,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       moment, și argumentul se susține singur.
     </div>
 
-    <h2>4. Injectarea excepțiilor</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-exceptions" data-guide-panel="exceptions" role="tabpanel" aria-labelledby="guide-tab-ro-exceptions" tabindex="0" hidden>
+    <h2>Injectarea excepțiilor</h2>
     <p>Alegerea unei excepții o armează. Se declanșează o singură dată, la pasul ei, iar
       diagrama se redesenează pentru a arăta traseul de tratare <i>înainte</i> să apeși
       rulează — poți astfel discuta traseul cu un stakeholder înainte de a-l executa.</p>
@@ -840,7 +903,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
         pași de așteptare.</li>
     </ul>
 
-    <h2>5. Model LLM local (LM Studio)</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-ai" data-guide-panel="ai" role="tabpanel" aria-labelledby="guide-tab-ro-ai" tabindex="0" hidden>
+    <h2>Model LLM local (LM Studio)</h2>
     <p>Simulatorul poate apela un model care rulează pe calculatorul tău pentru a explica pași
       și a-ți prezenta procesul. Cererile AI trimit contextul procesului către endpoint-ul
       configurat. Pentru date sensibile, folosește un endpoint local sau aprobat;
@@ -871,7 +936,37 @@ input[type=range]{accent-color:var(--accent);width:100px}
       eligibile din proiecte importate și <b>Propune corespondențe</b> în raportul de diferențe.
       Alege audiența în setări și verifică răspunsurile AI în sursele proiectului; pot fi incomplete sau incorecte.</p>
 
-    <h2>6. Exerciții de instruire sugerate</h2>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-model" data-guide-panel="model" role="tabpanel" aria-labelledby="guide-tab-ro-model" tabindex="0" hidden>
+    <h2>Formatul Process Model</h2>
+    <p><b>Încarcă sesiune…</b> și <b>Salvează sesiune…</b> transferă modelul procesului ca JSON.
+      Importul proiectului construiește același model din fișierele furnizate, în limitele parserului.</p>
+<pre><code>{
+  "meta": { "id":"procesul-meu", "name":"...", "description":"...", "source":"..." },
+  "steps": [
+    { "id":"s1", "name":"Înregistrează factura în SAP",
+      "actor":"bot",            // bot | human | system
+      "app":"SAP GUI", "ms":7800,
+      "gate":false,             // true = așteaptă confirmarea utilizatorului
+      "gatePrompt":"...", "branch":"main",
+      "detail":"descriere pentru business", "log":"mesaj de log",
+      "source":{ "pdd":"§4.6", "xaml":"Process.xaml &gt; Înregistrează factura" } }
+  ],
+  "exceptions": [
+    { "id":"e1", "name":"SAP nu răspunde", "class":"system",
+      "trigger":"s1", "retry":{ "count":3 },
+      "retryPath":["x1","x2"], "recovers":true,
+      "path":["x3","x4"], "resume":"s6", "terminal":false,
+      "detail":"semnificația excepției pentru BA", "source":"xaml" }
+  ]
+}</code></pre>
+    <p>Exemplu de structură: identificatorii din trasee trebuie să corespundă unor pași reali din model.
+      Pașii de tratare stau în <code>steps[]</code> cu <code>"branch":"exception"</code>.
+      O excepție se declanșează o singură dată pe rulare; <code>terminal</code> are prioritate față de
+      <code>resume</code>; fără <code>retry</code>, tratarea începe imediat.</p>
+    </section>
+    <section class="guide-panel" id="guide-panel-ro-training" data-guide-panel="training" role="tabpanel" aria-labelledby="guide-tab-ro-training" tabindex="0" hidden>
+    <h2>Exerciții de instruire sugerate</h2>
     <ol>
       <li>Rulează procesul curat. Întreabă grupul unde economisește robotul timp, apoi arată
         cifrele Timp robot și Așteptare om.</li>
@@ -884,6 +979,8 @@ input[type=range]{accent-color:var(--accent);width:100px}
         nedocumentate — și în ce moment al proiectului.</li>
     </ol>
 
+    </section>
+    </div>
   </div></section>
 </main>
 <footer class="app-footer">Developed by Dragos Marin</footer>
@@ -1090,7 +1187,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
    touched, and it drives the header badge and the User Guide's version
    line in both languages, so nothing else needs editing to stay in sync. */
 const APP_NAME = 'UiPath RPA Project Simulator';
-const APP_VERSION = '0.61';
+const APP_VERSION = '0.62';
 
 /* Version of the saved-session format (the Process Model JSON written by
    "Save session"). Bump it ONLY when the shape of the model changes in a way
@@ -3236,6 +3333,48 @@ $('fileIn').addEventListener('change',async e=>{
   e.target.value='';
 });
 
+/* Guide topic navigation. Shared topic IDs preserve the selection across EN/RO. */
+const GUIDE_TOPICS = ['start','import','diagram','human','exceptions','ai','model','training'];
+let guideTopic = 'start';
+function guideTopicForKey(current, key){
+  const index = GUIDE_TOPICS.indexOf(current);
+  if(index < 0) return null;
+  if(key === 'Home') return GUIDE_TOPICS[0];
+  if(key === 'End') return GUIDE_TOPICS[GUIDE_TOPICS.length-1];
+  if(key === 'ArrowRight') return GUIDE_TOPICS[(index+1)%GUIDE_TOPICS.length];
+  if(key === 'ArrowLeft') return GUIDE_TOPICS[(index+GUIDE_TOPICS.length-1)%GUIDE_TOPICS.length];
+  return null;
+}
+function selectGuideTopic(topic, focus = false){
+  if(!GUIDE_TOPICS.includes(topic)) return false;
+  const changed = topic !== guideTopic;
+  guideTopic = topic;
+  document.querySelectorAll('.guide').forEach(guide=>{
+    guide.querySelectorAll('[role="tab"]').forEach(tab=>{
+      const selected = tab.dataset.guideTopic === topic;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if(selected && focus && guide.dataset.lang === LANG) tab.focus();
+    });
+    guide.querySelectorAll('[role="tabpanel"]').forEach(panel=>{
+      panel.hidden = panel.dataset.guidePanel !== topic;
+    });
+    if(changed) guide.querySelector('.guide-content').scrollTop = 0;
+  });
+  return true;
+}
+document.querySelectorAll('.guide-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>selectGuideTopic(tab.dataset.guideTopic));
+  tab.addEventListener('keydown',e=>{
+    const topic = guideTopicForKey(tab.dataset.guideTopic, e.key);
+    if(topic === null) return;
+    e.preventDefault();
+    e.stopPropagation();
+    selectGuideTopic(topic, true);
+  });
+});
+
+/* App-level navigation and simulator-only shortcuts. */
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
@@ -3243,7 +3382,8 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
 }));
 
 document.addEventListener('keydown',e=>{
-  if(e.target.matches('input,select,textarea')) return;
+  if(e.defaultPrevented || !$('view-sim').classList.contains('on')) return;
+  if(e.target.closest('input,select,textarea,button,[contenteditable="true"]')) return;
   if(e.code==='Space'){ e.preventDefault(); if(!$('btnPlay').disabled) S.running?pause():play(); }
   if(e.code==='ArrowRight'){ e.preventDefault(); if(!$('btnStep').disabled){ pause(); advance(); } }
   if(e.key==='r'||e.key==='R') reset();
@@ -6515,6 +6655,7 @@ function applyLang(){
   buildScenarios(true);
   document.querySelectorAll('.guide').forEach(g=>{
     g.style.display = g.dataset.lang===LANG ? '' : 'none'; });
+  selectGuideTopic(guideTopic);
   $('selLang').value = LANG;
   renderGaps();
   paintTriggerBtn();
