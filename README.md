@@ -1,8 +1,19 @@
-# RPA Process Simulator
+# UiPath RPA Project Simulator
 
-A dependency-free, browser-based simulator for reviewing UiPath RPA processes. It turns workflows and process-design material into an interactive process map that can be played step by step, tested against exceptions, compared with a PDD, and used to draft a PDD.
+A dependency-free, browser-based tool for exploring your own UiPath RPA projects. Import workflows and an optional process design document (PDD) to build an interactive model, review exceptions and documentation gaps, and ask a local AI assistant about the process.
 
 The application is a single static page: no build, server, or account is required.
+
+An independent community tool developed by Dragos Marin. It is not affiliated with or endorsed by UiPath.
+
+## Who it is for
+
+| Role | Use it to |
+| --- | --- |
+| Business analyst (BA) | Compare documented requirements with the imported workflows, review gaps, clarify human work, and prepare a PDD draft. |
+| RPA developer | Inspect workflow relationships, activity details, and inferred exception paths with the wider delivery team. |
+| Stakeholder | Understand the process, discuss responsibilities and exceptions, and ask questions in business language. |
+| Trainer | Build a walkthrough from project material, step through the flow, and use explanations and questions in a workshop. |
 
 ## Run it
 
@@ -10,14 +21,24 @@ Download or clone the repository, then open [index.html](index.html) in a curren
 
 For a hosted demo, publish the `main` branch with GitHub Pages using the repository root as the source.
 
+## Start with your project
+
+1. Select **Import project…** and choose the project folder or its workflows and `project.json`.
+2. Add a PDD (`.json` or `.docx`) and BPMN diagram if available. A PDD is optional.
+3. Review any mapping suggestions, build the model, and inspect the steps, sources, and reported gaps.
+4. Walk through the simulation and exception paths. Optionally connect LM Studio for **Brief me**, **Explain**, **Ask**, and imported-project **Plain names**.
+5. Save the session or export the diagram, timeline, reports, and a PDD draft for review.
+
+The invoice and onboarding samples are starter examples for learning the controls. They do not define the scope of the application. Imported models describe what the parser can infer; they do not execute the UiPath project or replace runtime testing.
+
 ## What it does
 
-- Simulates happy paths, retries, recovery, terminal failures, human gates, and branching scenarios.
 - Imports UiPath `.xaml`, `.cs`, `project.json`, PDD (`.json` or `.docx`), and BPMN files in the browser.
+- Simulates happy paths, retries, recovery, terminal failures, human gates, and branching scenarios.
 - Flags mismatches between documented and implemented steps and exceptions.
 - Exports process models, diagrams, timelines, gap reports, and generated PDD drafts.
-- Includes generic invoice-processing and employee-onboarding samples.
 - Optionally connects to a user-configured OpenAI-compatible local endpoint, such as LM Studio, for explanations and briefing text.
+- Includes generic invoice-processing and employee-onboarding samples for trying the controls.
 
 ## Privacy and data handling
 

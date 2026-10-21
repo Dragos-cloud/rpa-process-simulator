@@ -1,13 +1,15 @@
-# RPA Process Simulator — Product Handbook
+# UiPath RPA Project Simulator — Product Handbook
 
-**Version covered:** 0.58 at last review — the number is the `APP_VERSION` constant, shown next to the app name in the header (as implemented in [`index.html`](index.html)). Bump it on every code change so the running app identifies what it contains; the published release notes are in [CHANGELOG.md](CHANGELOG.md).
+**Version covered:** 0.59 at last review — the number is the `APP_VERSION` constant, shown next to the app name in the header (as implemented in [`index.html`](index.html)). Bump it on every code change so the running app identifies what it contains; the published release notes are in [CHANGELOG.md](CHANGELOG.md).
 **Format:** a single self-contained HTML file — no build step, no server, no external dependencies. Opens directly in a browser.
 
 ---
 
 ## 1. What this product is
 
-A browser-based simulator that turns a real UiPath RPA project (workflows + process design document) into an interactive, playable model of the process. It lets a business analyst, RPA developer, or stakeholder:
+A browser-based tool that turns an imported UiPath RPA project (workflows plus an optional process design document) into an interactive model for business analysts, RPA developers, stakeholders, and trainers. The main workflow starts with **Import project…**; the included samples demonstrate the controls. The model is an interpretation of the supplied material, not execution of the original project.
+
+It lets a reviewer:
 
 - **Walk through the process step by step**, seeing exactly which steps are done by the robot, which require a human, and which are system/framework actions.
 - **Inject any documented (or coded) exception** and watch the retry/recovery/escalation path play out, before running real UAT.
@@ -19,10 +21,13 @@ Parsing and simulation execute client-side. When an AI feature is enabled, the a
 ### Primary users
 - **Business analysts** documenting or validating a TO-BE process.
 - **RPA developers** cross-checking that what they built matches what was signed off.
-- **Trainers / delivery leads** running walkthroughs or workshops with stakeholders who are not technical.
+- **Stakeholders** reviewing the process, responsibilities, and exceptions in business language.
+- **Trainers / delivery leads** running walkthroughs and workshops from project material.
+
+This is an independent community tool developed by Dragos Marin, with no affiliation with or endorsement by UiPath.
 
 ### Included example content
-Two hand-authored sample processes ship in the app (`SAMPLES.invoice`, `SAMPLES.onboarding`) so it is usable with zero setup:
+Two hand-authored sample processes ship in the app (`SAMPLES.invoice`, `SAMPLES.onboarding`) for learning the controls before importing your own project:
 - **AP Invoice Processing** — a REFramework, queue-based process with OCR extraction, SAP posting, and five exception scenarios (recoverable system exception, business exception, non-recoverable system exception, empty-queue "exception", terminal credential failure).
 - **Employee Onboarding** — an attended, hand-off-heavy process across AD/M365/Workday/ServiceNow with two deliberate human approval gates and four exception scenarios, including a business exception that pauses for a human decision without killing the run.
 

@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RPA Process Simulator</title>
+<meta name="description" content="Import a UiPath RPA project to explore workflows, review PDD gaps, rehearse exceptions and ask a local AI assistant. For business analysts, RPA developers, stakeholders and trainers.">
+<title>UiPath RPA Project Simulator</title>
 <style>
 :root{
   --bg:#0f1419; --panel:#161c23; --panel2:#1c242d; --line:#2a3541;
@@ -19,9 +20,9 @@ body{margin:0;background:var(--bg);color:var(--txt);
   display:flex;flex-direction:column;overflow:hidden}
 
 /* ---------- header / tabs ---------- */
-header{display:flex;align-items:center;gap:16px;padding:0 16px;
-  background:var(--panel);border-bottom:1px solid var(--line);flex:0 0 46px}
-.brand{font-weight:600;letter-spacing:.2px;white-space:nowrap}
+header{display:flex;align-items:center;gap:8px 16px;padding:6px 16px;flex-wrap:wrap;
+  background:var(--panel);border-bottom:1px solid var(--line);flex:0 0 auto;min-height:46px}
+.brand{font-weight:600;letter-spacing:.2px;min-width:0}
 .brand span{color:var(--accent)}
 .tabs{display:flex;gap:2px;margin-left:8px}
 .tab{padding:6px 14px;border-radius:6px 6px 0 0;cursor:pointer;color:var(--dim);
@@ -262,7 +263,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
 <body>
 
 <header>
-  <div class="brand">RPA <span>Process Simulator</span> <span id="appVer" style="color:var(--dimmer);font-weight:400;font-size:11px"></span></div>
+  <div class="brand"><span id="appName">UiPath RPA Project Simulator</span> <span id="appVer" style="color:var(--dimmer);font-weight:400;font-size:11px"></span></div>
   <div class="tabs">
     <div class="tab on" data-view="sim">Simulator</div>
     <div class="tab" data-view="guide">User Guide</div>
@@ -378,15 +379,20 @@ input[type=range]{accent-color:var(--accent);width:100px}
   <!-- ================= GUIDE ================= -->
   <section class="view" id="view-guide"><div class="guide" id="guideBody" data-lang="en">
 
-    <h1>RPA Process Simulator — User Guide</h1>
+    <h1 id="guideTitleEN">UiPath RPA Project Simulator — User Guide</h1>
     <p style="color:var(--dim)">Version <span id="guideVerEN"></span> · XAML and PDD import · gap report · local LLM</p>
 
     <div class="note">
-      <b>What this does.</b> It reads a UiPath project and its PDD, plays the process
-      end-to-end, shows exactly where humans are required, lets you inject any exception to
-      watch how the robot behaves, and reports where the document and the code disagree.
-      Everything runs in this browser — no file leaves your machine.
+      <b>Start with your project.</b> Import UiPath workflows and, optionally, a PDD to
+      build a model for walkthroughs, exception reviews and documentation. Business analysts,
+      RPA developers, stakeholders and trainers can explore the same project at different
+      levels of detail. The built-in processes are examples for trying the controls.
+      Parsing runs in this browser; optional AI features send context to your configured endpoint.
     </div>
+
+    <p><b>For your role:</b> BAs review documented requirements and gaps; RPA developers
+      inspect workflow relationships and exception handling; stakeholders discuss the process
+      and human responsibilities; trainers guide a room through the steps and ask questions.</p>
 
     <h2>0. Importing a real project</h2>
     <p>Press <b>Import project…</b> and select everything at once:</p>
@@ -448,7 +454,8 @@ input[type=range]{accent-color:var(--accent);width:100px}
 
     <h2>1. Getting started in 60 seconds</h2>
     <ol>
-      <li>Pick a process from the <b>Process</b> dropdown.</li>
+      <li>Use <b>Import project…</b> to load your UiPath files and optional PDD, review the mappings,
+        then build the simulation. To try the controls first, choose a built-in example from <b>Project</b>.</li>
       <li>Press <b>Play</b>. The diagram lights up step by step and the timeline on the right
         narrates what the robot is doing.</li>
       <li>When an amber <b>Human action required</b> card appears, the robot has stopped and
@@ -574,14 +581,18 @@ input[type=range]{accent-color:var(--accent);width:100px}
         without it, and one thing to check when documenting it.</li>
       <li><b>✦ Brief me</b> above the timeline — a pre-run briefing covering what the robot
         achieves, where humans remain and which exception most threatens the business case.</li>
+      <li><b>Ask</b> — ask a question about the current project using the supplied process context.</li>
+      <li><b>✦ Plain names</b> — rewrite eligible imported step and decision labels in business language;
+        switch back to the originals with the checkbox.</li>
+      <li><b>Suggest pairings</b> in the gap report — propose matches between coded and documented exceptions.</li>
     </ul>
     <p>Set the audience in the settings modal. The same step explained for a stakeholder and
-      for a developer produces usefully different answers.</p>
+      for a developer produces usefully different answers. Check AI output against the project
+      sources; it may be incomplete or incorrect.</p>
 
     <h2>6. The Process Model format</h2>
-    <p>Import and Export move models in and out as JSON. This is the contract the future PDD
-      and XAML parsers will emit, so anything you can express here will be reachable from a
-      real project.</p>
+    <p><b>Load session…</b> and <b>Save session…</b> move process models in and out as JSON.
+      The project importers build this same model from the supplied files, within the parser's limits.</p>
 <pre><code>{
   "meta": { "id":"my-process", "name":"...", "description":"...", "source":"..." },
   "steps": [
@@ -651,16 +662,20 @@ input[type=range]{accent-color:var(--accent);width:100px}
   <!-- ============ ROMANIAN GUIDE ============ -->
   <div class="guide" data-lang="ro" style="display:none">
 
-    <h1>Simulator de proces RPA — Ghid de utilizare</h1>
+    <h1 id="guideTitleRO">UiPath RPA Project Simulator — Ghid de utilizare</h1>
     <p style="color:var(--dim)">Versiunea <span id="guideVerRO"></span> · import XAML și PDD · raport de diferențe · model LLM local</p>
 
     <div class="note">
-      <b>Ce face aplicația.</b> Citește un proiect UiPath împreună cu PDD-ul, rulează procesul
-      de la un capăt la altul, arată exact unde este nevoie de intervenție umană, permite
-      injectarea oricărei excepții pentru a observa comportamentul robotului și raportează
-      unde documentul și codul nu coincid. Totul rulează în acest browser — niciun fișier nu
-      pleacă de pe calculatorul tău.
+      <b>Începe cu proiectul tău.</b> Importă workflow-uri UiPath și, opțional, un PDD pentru
+      a construi un model pentru prezentări, analiza excepțiilor și documentare. Analiștii de
+      business, dezvoltatorii RPA, stakeholderii și trainerii pot explora același proiect la
+      niveluri diferite de detaliu. Procesele incluse sunt exemple pentru a încerca comenzile.
+      Analiza rulează în browser; funcțiile AI opționale trimit context către endpoint-ul configurat.
     </div>
+
+    <p><b>Pentru rolul tău:</b> BA verifică cerințe și diferențe față de PDD; dezvoltatorii RPA
+      inspectează legături între workflow-uri și tratarea excepțiilor; stakeholderii discută
+      procesul și responsabilitățile umane; trainerii ghidează prezentări și întrebări.</p>
 
     <h2>0. Importul unui proiect real</h2>
     <p>Apasă <b>Importă proiect…</b> și selectează tot deodată:</p>
@@ -724,7 +739,8 @@ input[type=range]{accent-color:var(--accent);width:100px}
 
     <h2>1. Primii pași</h2>
     <ol>
-      <li>Alege un proces din lista <b>Proces</b>.</li>
+      <li>Folosește <b>Importă proiect…</b> pentru fișierele UiPath și PDD-ul opțional, verifică
+        asocierile și construiește simularea. Pentru a încerca mai întâi comenzile, alege un exemplu inclus din <b>Proiect</b>.</li>
       <li>Apasă <b>Rulează</b>. Diagrama se aprinde pas cu pas, iar cronologia din dreapta
         povestește ce face robotul.</li>
       <li>Când apare cardul portocaliu <b>Este necesară intervenția umană</b>, robotul s-a
@@ -831,7 +847,9 @@ input[type=range]{accent-color:var(--accent);width:100px}
       credențiale, nu ca eroare generică de conexiune, ca să poți distinge o problemă de
       autentificare de una de CORS sau de server oprit.</p>
     <p>Funcții: <b>✦ Explain</b> în panoul de detalii, <b>✦ Prezintă-mi</b> deasupra
-      cronologiei și <b>Propune corespondențe</b> în raportul de diferențe.</p>
+      cronologiei, <b>Întreabă</b> despre proiectul curent, <b>✦ Nume simple</b> pentru etichete
+      eligibile din proiecte importate și <b>Propune corespondențe</b> în raportul de diferențe.
+      Alege audiența în setări și verifică răspunsurile AI în sursele proiectului; pot fi incomplete sau incorecte.</p>
 
     <h2>6. Exerciții de instruire sugerate</h2>
     <ol>
@@ -1036,7 +1054,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
 
 <script>
 /* =====================================================================
-   RPA PROCESS SIMULATOR
+   UIPATH RPA PROJECT SIMULATOR
    Phase 1-3: process model, diagram+timeline+playback, exception injection
    Plus: LM Studio local LLM integration
    ===================================================================== */
@@ -1044,7 +1062,8 @@ input[type=range]{accent-color:var(--accent);width:100px}
 /* Bump this on every code change — it's the one place that has to be
    touched, and it drives the header badge and the User Guide's version
    line in both languages, so nothing else needs editing to stay in sync. */
-const APP_VERSION = '0.58';
+const APP_NAME = 'UiPath RPA Project Simulator';
+const APP_VERSION = '0.59';
 
 /* Version of the saved-session format (the Process Model JSON written by
    "Save session"). Bump it ONLY when the shape of the model changes in a way
@@ -6186,6 +6205,10 @@ window.RPASIM = { S, SAMPLES, LLM, buildPlan, load:loadModel, byId,
   plainCandidates, plainPrompt, parsePlain, applyPlain, setPlainNames,
   pddHtml, pddMd, pddDocx, zipStore, crc32, SCHEMA_VERSION, migrateModel, serializeModel, pddQuestions, draftExtraQuestions };
 
+document.title = APP_NAME;
+$('appName').textContent = APP_NAME;
+$('guideTitleEN').textContent = APP_NAME+' — User Guide';
+$('guideTitleRO').textContent = APP_NAME+' — Ghid de utilizare';
 $('appVer').textContent = 'v'+APP_VERSION;
 $('guideVerEN').textContent = APP_VERSION;
 $('guideVerRO').textContent = APP_VERSION;
