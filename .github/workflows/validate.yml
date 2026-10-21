@@ -19,3 +19,7 @@ jobs:
       - name: Compile embedded JavaScript
         run: >-
           node -e "const fs=require('fs'); const page=fs.readFileSync('index.html','utf8'); const start=page.indexOf('<script>'); const end=page.indexOf('</script>',start); if(start<0||end<0) throw new Error('Inline script not found'); new Function(page.slice(start+8,end)); console.log('Embedded JavaScript compiles.');"
+      - name: Test PDD structure compatibility
+        run: node --test tests/pdd-parser.test.cjs
+      - name: Test scenario wording and branch polarity
+        run: node --test tests/scenarios.test.cjs

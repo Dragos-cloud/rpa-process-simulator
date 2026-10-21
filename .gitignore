@@ -5,6 +5,8 @@
 *.docx
 imports/
 exports/
+# Local synthetic filming fixture; only the approved demo is published.
+/customer-order-processing/
 
 # Local video production, private notes, backups and credentials
 /media/

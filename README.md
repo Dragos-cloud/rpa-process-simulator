@@ -6,6 +6,14 @@ The application is a single static page: no build, server, or account is require
 
 An independent community tool developed by Dragos Marin. It is not affiliated with or endorsed by UiPath.
 
+## Watch the walkthrough
+
+[![UiPath RPA Project Simulator walkthrough](docs/demo/preview.jpg)](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)
+
+[Watch or download the 2:46 video](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/uipath-rpa-project-simulator-demo.mp4) · [English subtitles](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/captions.srt) · [Walkthrough guide](docs/demo/README.md)
+
+The demo imports a synthetic, intentionally unfinished Customer Order Processing project, reviews PDD-to-code evidence, and uses actual local-model briefings, explanations and questions. The predefined scenarios appear at the end as training examples. The video has AI-generated narration and a persistent AI disclosure; it does not show runtime execution or prove implementation completeness.
+
 ## Who it is for
 
 | Role | Use it to |
@@ -35,7 +43,7 @@ The invoice and onboarding samples are starter examples for learning the control
 
 - Imports UiPath `.xaml`, `.cs`, `project.json`, PDD (`.json` or `.docx`), and BPMN files in the browser.
 - Simulates happy paths, retries, recovery, terminal failures, human gates, and branching scenarios.
-- Flags mismatches between documented and implemented steps and exceptions.
+- Surfaces mappings, documentation differences and limited implementation evidence for human review—not a complete defect audit.
 - Exports process models, diagrams, timelines, gap reports, and generated PDD drafts.
 - Optionally connects to a user-configured OpenAI-compatible local endpoint, such as LM Studio, for explanations and briefing text.
 - Includes generic invoice-processing and employee-onboarding samples for trying the controls.
@@ -51,14 +59,25 @@ This repository intentionally ignores imported workflows, PDDs, BPMN files, gene
 - [index.html](index.html) — complete application (HTML, CSS, JavaScript, and generic samples).
 - [PRODUCT_HANDBOOK.md](PRODUCT_HANDBOOK.md) — detailed product and maintenance reference.
 - [CHANGELOG.md](CHANGELOG.md) — public release notes.
+- [docs/demo/README.md](docs/demo/README.md) — video, chapter guide, source-check limitations and a matching LinkedIn post draft. The MP4 and captions are attached to the GitHub release rather than stored in Git history.
 
 ## Quality checks
 
-The GitHub Actions workflow verifies that the embedded JavaScript compiles. Before releasing, also check both sample processes, human gates, exception recovery, session save/load, and document exports in your target browsers. Test project imports with anonymised fixtures only.
+Run `node --test tests/pdd-parser.test.cjs tests/scenarios.test.cjs` for dependency-free parser and scenario regression tests. The GitHub Actions workflow runs these tests and verifies that the embedded JavaScript compiles. Before releasing, also check both sample processes, human gates, exception recovery, session save/load, and document exports in your target browsers. Test project imports with anonymised fixtures only.
+
+## PDD structure support
+
+Word imports support legacy English/Romanian step-and-exception tables and lane-oriented tables such as `# / BPMN element / Element type / Description`. Columns are resolved by their names rather than fixed positions. Current-state sections and grouped summaries are kept out of the target step list; gateways and events retain their types.
+
+The **PDD readout** in mapping and the gap report shows what was extracted and which tables were not normalised. Exception state transitions are separate from exception definitions. Business rules, human-review requirements, open constraints and source references are retained. Human task requirements are not inserted as assumed executable gates, and missing Throw evidence does not prove that branch/status-based exception handling is absent.
+
+Mapping works with REFramework `Process.xaml` calls and non-REFramework entry-workflow calls. Suggestions still need human confirmation. This is structured extraction, not universal understanding of arbitrary prose, embedded diagrams or every Word template. Existing JSON PDD imports remain supported.
 
 ## Limitations
 
-Simulation timings are estimates, not production benchmarks. Imported models and PDD mappings need human review; coded workflows and unsupported control-flow constructs may not be fully represented. AI explanations and generated documents are drafts and can contain mistakes. See the handbook for the detailed limitations.
+Scenario titles identify the activity a route focuses on. **Branch details…** explains supported Boolean assumptions and retains the complete source expression and True/Then or False/Else outcome. These explanations do not need an LLM and do not evaluate runtime data. Unsupported expressions are flagged for technical review; older sessions with truncated expressions need a project re-import to recover the source. AI labels cannot change the selected branch or the source-based explanation.
+
+Simulation timings are estimates, not production benchmarks. Imported models and PDD mappings need human review; coded workflows and unsupported control-flow constructs may not be fully represented. Imported persistence activities and human waits are not fully modelled: a BOT label or zero human-wait total does not prove a process has no manual work. AI explanations and generated documents are drafts and can contain mistakes, including overstating what unfinished code implements. Check them against the original sources. See the handbook for the detailed limitations.
 
 ## License
 

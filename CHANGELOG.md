@@ -2,6 +2,24 @@
 
 All notable public-facing changes are documented here.
 
+## 0.61 — 2026-10-21
+
+- Replaced raw-condition scenario names with route-focus titles and expandable branch explanations, available without an LLM.
+- Added conservative Boolean interpretation for supported VB/C# negation, conjunction, disjunction and equality expressions, preserving branch polarity and exact source values.
+- Retained full decision conditions, source workflow and authored label alongside compact display names. Older truncated conditions prompt a re-import; unsupported expressions remain technical.
+- Preserved selected branches when toggling AI labels and included selected branch assumptions and full conditions in timeline exports.
+- Added scenario polarity, grouping, source-retention, compatibility and selection regression tests.
+- Published an import-led, 2:46 walkthrough with actual local-AI responses, English captions and a persistent AI disclosure; the MP4 and subtitles are release assets linked from the README.
+- Updated the handbook and walkthrough guidance to distinguish documented requirements, source evidence, unsupported human waits and AI-generated review suggestions from completed implementation.
+
+## 0.60 — 2026-10-21
+
+- Added semantic column matching for legacy English/Romanian PDD tables and lane-oriented BPMN element tables, including reordered columns and current/future-state scope.
+- Kept exception definitions, state transitions, human-review requirements, business rules and open constraints distinct, with heading/table/row references and visible parsing diagnostics.
+- Added PDD mapping for calls in non-REFramework entry workflows and retained the parsed PDD in saved sessions and bounded local-AI context.
+- Reworded missing mappings and missing Throw evidence as review findings, not proof of missing implementation. Unspecified exception types are no longer guessed from table order.
+- Added dependency-free parser regression tests to the validation workflow.
+
 ## 0.59 — 2026-10-21
 
 - Renamed the application to UiPath RPA Project Simulator.

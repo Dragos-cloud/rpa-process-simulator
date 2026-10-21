@@ -51,6 +51,9 @@ main{flex:1;min-height:0;position:relative}
 .tgroup .grow{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .gcap{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--dimmer)}
 label.lbl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--dimmer)}
+.scenario-proof{margin-top:8px;white-space:normal;font-size:12px}
+.scenario-proof li{margin:8px 0;overflow-wrap:anywhere}
+.scenario-source{white-space:pre-wrap;overflow-wrap:anywhere;padding:8px;background:var(--bg);border:1px solid var(--line);border-radius:5px}
 
 button{background:var(--panel2);color:var(--txt);border:1px solid var(--line);
   border-radius:6px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
@@ -317,6 +320,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
           <span id="scnWrap" style="display:none;align-items:center;gap:6px;margin-left:10px">
             <label class="lbl" data-t="tb.scenario" style="margin-right:2px">Scenario</label>
             <select id="selScn" style="max-width:320px"></select>
+            <button class="sm" id="btnScenarioDetails" data-t="scn.details" disabled>Branch details…</button>
           </span>
         </div>
       </div>
@@ -415,11 +419,15 @@ input[type=range]{accent-color:var(--accent);width:100px}
       it carries structure the Word file does not.</p>
 
     <h3>The mapping step</h3>
-    <p>After parsing, you are shown every workflow invoked from <code>Process.xaml</code> in
-      execution order, with a suggested PDD section for each. <b>Check these.</b> The
+    <p>After parsing, you are shown calls from <code>Process.xaml</code> or the declared entry
+      workflow, with a suggested PDD requirement for each. <b>Check these.</b> The
       suggestions come from text similarity, which works when names share numbers or
       distinctive words and fails when a Romanian document meets English class names. Anything
       you leave unmatched is reported as a gap rather than quietly guessed.</p>
+    <p>Open <b>PDD readout</b> to inspect extracted target steps, typed BPMN elements,
+      human-review requirements, rules, exception state transitions and table diagnostics.
+      Legacy step tables and lane-oriented tables can use different column orders.
+      A missing mapping or matching Throw is a review point, not proof of missing implementation.</p>
 
     <h3>Framework steps</h3>
     <p>REFramework plumbing — <code>InitAllSettings</code>, <code>GetTransactionData</code>,
@@ -464,6 +472,10 @@ input[type=range]{accent-color:var(--accent);width:100px}
       <li>If the process contains decisions that choose between steps (an imported project with <b>◇</b> diamonds), a <b>Scenario</b> selector appears next to it: pick one path and the steps on the other branches are skipped and dimmed. <b>All branches</b> lists every branch in order, as before.</li>
       <li>On an imported project, <b>✦ Plain names</b> asks the local model to rewrite developer-style step names and raw conditions in plain business language; the <b>Plain names (AI)</b> checkbox switches back to the original names at any time.</li>
     </ol>
+    <p>Scenario titles identify a route's activity focus. <b>Branch details…</b> explains the selected
+      Boolean assumptions without an LLM, and lets you expand the full source condition and required
+      True/Then or False/Else outcome. Unsupported expressions stay technical. Re-import older sessions
+      if their conditions were already truncated. The walkthrough does not evaluate real runtime data.</p>
     <p>Keyboard: <code>Space</code> play/pause, <code>→</code> single step, <code>R</code> reset.</p>
 
     <h2>2. Reading the diagram</h2>
@@ -699,11 +711,15 @@ input[type=range]{accent-color:var(--accent);width:100px}
       structură pe care fișierul Word nu o are.</p>
 
     <h3>Pasul de corespondență</h3>
-    <p>După analiză vezi fiecare workflow apelat din <code>Process.xaml</code>, în ordinea
-      execuției, cu o secțiune PDD sugerată. <b>Verifică-le.</b> Sugestiile provin din
+    <p>După analiză vezi apelurile din <code>Process.xaml</code> sau workflow-ul de intrare
+      declarat, cu o cerință PDD sugerată. <b>Verifică-le.</b> Sugestiile provin din
       similaritate textuală, care funcționează când denumirile împart numere sau cuvinte
       distinctive și eșuează când un document în română întâlnește denumiri de clase în
       engleză. Ce rămâne nepotrivit este raportat ca diferență, nu ghicit în tăcere.</p>
+    <p>Deschide <b>Conținut PDD</b> pentru pași, elemente BPMN tipizate, cerințe de intervenție
+      umană, reguli, tranziții de stare și diagnosticul tabelelor. Tabelele vechi și cele
+      organizate pe roluri pot avea coloane în altă ordine. Lipsa unei asocieri sau a unui
+      Throw corespondent necesită verificare și nu dovedește lipsa implementării.</p>
 
     <h3>Pașii de framework</h3>
     <p>Infrastructura REFramework — <code>InitAllSettings</code>,
@@ -749,6 +765,10 @@ input[type=range]{accent-color:var(--accent);width:100px}
       <li>Dacă procesul conține decizii care aleg între pași (un proiect importat cu romburi <b>◇</b>), apare un selector <b>Scenariu</b> lângă ea: alege un traseu, iar pașii de pe celelalte ramuri sunt săriți și estompați. <b>Toate ramurile</b> le listează pe toate, în ordine, ca până acum.</li>
       <li>La un proiect importat, <b>✦ Nume simple</b> cere modelului local să rescrie în limbaj de business numele de pași scrise pentru dezvoltatori și condițiile brute; caseta <b>Nume simple (AI)</b> revine oricând la numele originale.</li>
     </ol>
+    <p>Titlurile scenariilor indică activitatea relevantă a traseului. <b>Detalii ramuri…</b> explică
+      ipotezele booleene selectate fără LLM și permite extinderea condiției sursă complete cu rezultatul
+      True/Then sau False/Else necesar. Expresiile nesuportate rămân tehnice; reimportă sesiunile vechi cu
+      condiții trunchiate. Prezentarea nu evaluează date reale de rulare.</p>
     <p>Taste: <code>Space</code> rulează/pauză, <code>→</code> un singur pas,
       <code>R</code> resetare.</p>
 
@@ -867,6 +887,13 @@ input[type=range]{accent-color:var(--accent);width:100px}
   </div></section>
 </main>
 <footer class="app-footer">Developed by Dragos Marin</footer>
+
+<div class="mask" id="scenarioMask">
+  <div class="modal" style="width:760px">
+    <div class="modal-hd"><b id="scenarioTitle">Scenario</b><button class="sm" id="scenarioClose">✕</button></div>
+    <div class="modal-bd" id="scenarioBody"></div>
+  </div>
+</div>
 
 <!-- ================= IMPORT PROJECT MODAL ================= -->
 <div class="mask" id="impMask">
@@ -1063,7 +1090,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
    touched, and it drives the header badge and the User Guide's version
    line in both languages, so nothing else needs editing to stay in sync. */
 const APP_NAME = 'UiPath RPA Project Simulator';
-const APP_VERSION = '0.59';
+const APP_VERSION = '0.61';
 
 /* Version of the saved-session format (the Process Model JSON written by
    "Save session"). Bump it ONLY when the shape of the model changes in a way
@@ -2009,6 +2036,9 @@ function exportTimelineMd(){
     (S.scn ? `Scenario: ${S.scnLabel}\n` : '')+
     (S.outcome ? `Outcome: ${S.outcome}\n` : '')+
     `Bot time: ${$('stBot').textContent} · Human wait: ${$('stHuman').textContent}\n\n`;
+  if(S.scnDescription) md += '\n## Selected branch assumptions\n\n'+S.scnDescription.clauses.map(c=>
+    '- '+c.text+'\n  Required condition outcome: '+(c.truth?'True / Then':'False / Else')+
+    '\n  Source: '+c.workflow+'\n\n'+c.condition.split('\n').map(line=>'      '+line).join('\n')+'\n').join('\n')+'\n';
   evs.forEach((d,i)=>{
     const kind = Object.keys(KIND_LABEL).find(k=>d.classList.contains(k)) || 'info';
     const title = d.querySelector('.ev-t')?.textContent || '';
@@ -2047,7 +2077,8 @@ function reset(){
     `<span class="pill">${S.exc.class}</span>`+
     `<span class="pill">fires ${S.exc.firesAfter?'after':'at'}: ${esc(byId(S.exc.trigger)?.name||S.exc.trigger)}</span>`);
   if(S.scn) tlAdd('info','⑂','Scenario: '+S.scnLabel,
-    'Steps on branches this scenario does not take are skipped (dimmed on the diagram).','');
+    'Steps on branches this scenario does not take are skipped (dimmed on the diagram).',
+    '<details class="scenario-proof"><summary>'+esc(T('scn.details'))+'</summary>'+scenarioDetailsHtml(S.scnDescription)+'</details>');
   if(S.exc && S.scn && S.skipped.has(resolveMain(S.exc.trigger)))
     tlAdd('info','⚠','The armed exception will not fire in this scenario',
       'The step it fires at sits on a branch this scenario does not take.','');
@@ -2644,7 +2675,7 @@ $('btnExplain').addEventListener('click', async ()=>{
     (s.branch==='exception'?'\nThis step is part of an exception handler.':'')+
     (codeCtx ? `\n\n${codeCtx}` : '');
   await askLLM(box, SYS(),
-    ctx+`\n\nExplain this step to me. `+
+    ctx+(s.pddDetail ? '\n\nDocumented requirement ('+(s.pddRef||'PDD')+'; not proof of implementation):\n'+s.pddDetail.slice(0,4000) : '')+`\n\nExplain this step to me. `+
     (codeBlocks.length ? `It contains inline code (Invoke Code) — explain in plain business terms `+
       `what that code actually reads, changes or decides, specific enough that I can check it against `+
       `what the PDD says this step should do. ` : '')+
@@ -2664,7 +2695,7 @@ function processContext(){
     mainSteps().map((s,i)=>`${i+1}. [${s.actor}] ${s.name} (${s.app||'—'})`).join('\n')+
     `\n\nKnown exceptions:\n`+
     m.exceptions.map(e=>`- ${e.name} (${e.class}, fires ${e.firesAfter?'after':'at'} "${byId(e.trigger)?.name}")`).join('\n')+
-    (S.exc?`\n\nCurrently armed exception: ${S.exc.name}`:'');
+    (S.exc?`\n\nCurrently armed exception: ${S.exc.name}`:'')+pddPromptContext(m._pdd);
 }
 
 $('btnBrief').addEventListener('click', async ()=>{
@@ -2771,6 +2802,7 @@ $('llmOff').addEventListener('click',()=>{
    project's gaps happened to be computed last. */
 function loadModel(m){
   S.model=m; S.exc=null; S.sel=null; S.genPdd=null; $('insp').classList.remove('on');
+  $('scenarioMask').classList.remove('on');
   S.gaps = m._gaps || []; S.coverage = m._coverage || null;
   $('btnGaps').style.display = (S.gaps.length || S.coverage) ? '' : 'none';
   const dec = m.coverageDecisions;
@@ -2833,7 +2865,7 @@ $('selProc').addEventListener('change',e=>{
 function plainCandidates(){
   return S.model.steps.filter(s=>{
     if(s.branch==='exception' || s.synth || s.grp) return false;
-    if(s.kind==='gateway') return !!s.decision && !s.inline;
+    if(s.kind==='gateway') return !!s.decision && !s.inline && scenarioSource(s).complete && scenarioSource(s).condition.length<=12000;
     return (!!s.xamlTarget && s.nameSrc!=='typed') || !!s.scoped;
   });
 }
@@ -2841,13 +2873,14 @@ const PLAIN_SYS = () =>
   'You rename steps of an RPA (UiPath) process for business analysts who cannot read code. '+
   'For a STEP write a short verb phrase (at most 7 words) saying what the robot achieves in business terms. '+
   'For a DECISION write a short yes/no question (at most 10 words) in business terms. '+
+  'Yes must mean that the supplied condition is TRUE (Then); preserve every negation. '+
   'Use only the facts given for each item; never invent. No file names, no code identifiers, no variable names, no quotation marks. '+
   (LANG_INSTR[LLM.lang] || LANG_INSTR.auto)+' '+
   'Answer with exactly one line per item, in the form: id | label — and nothing else.';
 function plainPrompt(batch){
   const clean = t => String(t||'').replace(/\s+/g,' ').trim();
   return batch.map(s=>{
-    if(s.kind==='gateway') return '['+s.id+'] DECISION\ncondition: '+clean(s.name.replace(/\?$/,''))+'\n'+clean(s.detail).slice(0,300);
+    if(s.kind==='gateway') return '['+s.id+'] DECISION\ncondition (TRUE is the Then branch; preserve its polarity): '+scenarioSource(s).condition+'\n'+clean(s.detail).slice(0,300);
     const acts = (s.sub||[]).filter(a=>a.name && !/^(Sequence|Flowchart)$/.test(a.tag)).slice(0,8).map(a=>clean(a.name)).join('; ');
     const logs = (s.logs||[]).slice(0,3).map(l=>clean(l).slice(0,110)).join(' / ');
     const desc = /^(Invoked from|Inline in)/.test(s.detail||'') || (s.does && s.detail===s.does) ? '' : clean(s.detail).slice(0,220);
@@ -2893,7 +2926,7 @@ function applyPlain(map){
 function setPlainNames(on){
   S.model.meta.plainNames = !!on;
   S.model.steps.forEach(s=>{ if(s.plain) s.name = on ? s.plain : s.plainOrig; });
-  S.mainCache = null; buildScenarios(); reset();
+  S.mainCache = null; buildScenarios(true); reset();
 }
 $('chkPlain').addEventListener('change', e=>setPlainNames(e.target.checked));
 $('btnPlain').addEventListener('click', async ()=>{
@@ -2918,54 +2951,220 @@ $('btnPlain').addEventListener('click', async ()=>{
   tlAdd('info','✦', T('tb.plainChk'), T('plain.done').replace('{n}',done).replace('{total}',items.length), '');
 });
 
+/* Read-only condition interpretation. Never evaluates project expressions.
+   Unknown syntax fails closed: source and branch polarity remain available. */
+function parseScenarioCondition(source){
+  const s=String(source||'').trim().replace(/^\[([\s\S]*)\]$/,'$1');
+  if(!s || s.length>50000) return null;
+  const tokens=[]; let p=0;
+  while(p<s.length){
+    if(/\s/.test(s[p])){ p++; continue; }
+    if(tokens.length>2000) return null;
+    if(s[p]==='"'){
+      let value='', closed=false; p++;
+      while(p<s.length){
+        if(s[p]==='"'){
+          if(s[p+1]==='"'){ value+='"'; p+=2; continue; }
+          p++; closed=true; break;
+        }
+        // Do not reinterpret C# escapes as VB text: unsupported strings stay technical.
+        if(s[p]==='\\') return null;
+        value+=s[p++];
+      }
+      if(!closed) return null;
+      tokens.push({type:'value',kind:'string',value}); continue;
+    }
+    const id=s.slice(p).match(/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*/);
+    if(id){
+      const low=id[0].toLowerCase(); p+=id[0].length;
+      if(['not','and','andalso','or','orelse'].includes(low)) tokens.push({type:low==='not'?'not':low.startsWith('and')?'and':'or'});
+      else if(low==='true'||low==='false') tokens.push({type:'value',kind:'boolean',value:low==='true'});
+      else tokens.push({type:'id',value:id[0]});
+      continue;
+    }
+    const number=s.slice(p).match(/^-?\d+(?:\.\d+)?/);
+    if(number){ tokens.push({type:'value',kind:'number',value:number[0]}); p+=number[0].length; continue; }
+    const op=s.slice(p).match(/^(?:&&|\|\||==|!=|<>|[!(),=])/);
+    if(!op) return null;
+    const types={'&&':'and','||':'or','!':'not','==':'eq','=':'eq','!=':'ne','<>':'ne'};
+    tokens.push({type:types[op[0]]||op[0]}); p+=op[0].length;
+  }
+  let i=0, depth=0;
+  const take=t=>tokens[i]?.type===t ? tokens[i++] : null;
+  const value=()=>{
+    const t=tokens[i++]; if(!t || !['id','value'].includes(t.type)) throw Error('value');
+    return t.type==='id'?{type:'id',value:t.value}:{type:'literal',kind:t.kind,value:t.value};
+  };
+  const primary=()=>{
+    if(++depth>64) throw Error('depth');
+    let node;
+    if(take('(')){ node=or(); if(!take(')')) throw Error('parenthesis'); }
+    else if(tokens[i]?.type==='id' && /^string\.equals$/i.test(tokens[i].value)){
+      i++; if(!take('(')) throw Error('call');
+      const left=value(); if(!take(',')) throw Error('arguments');
+      const right=value();
+      if(take(',')){
+        const mode=value();
+        if(mode.type!=='id' || !/^StringComparison\.(?:Ordinal(?:IgnoreCase)?|CurrentCulture(?:IgnoreCase)?|InvariantCulture(?:IgnoreCase)?)$/i.test(mode.value)) throw Error('comparison mode');
+      }
+      if(!take(')')) throw Error('call end');
+      node={type:'eq',left,right};
+    } else node=value();
+    depth--; return node;
+  };
+  const equality=()=>{
+    let left=primary();
+    if(tokens[i]?.type==='eq'||tokens[i]?.type==='ne'){
+      const type=tokens[i++].type, right=primary();
+      if(!['id','literal'].includes(left.type)||!['id','literal'].includes(right.type)) throw Error('comparison');
+      left={type,left,right};
+    }
+    return left;
+  };
+  const not=()=>{ if(take('not')){ if(++depth>64) throw Error('depth'); const child=not(); depth--; return {type:'not',child}; } return equality(); };
+  const and=()=>{ let node=not(); while(take('and')) node={type:'and',left:node,right:not()}; return node; };
+  const or=()=>{ let node=and(); while(take('or')) node={type:'or',left:node,right:and()}; return node; };
+  try{ const ast=or(); return i===tokens.length?ast:null; }catch(e){ return null; }
+}
+
+function scenarioWords(value){
+  return String(value||'').replace(/([A-Z]+)([A-Z][a-z])/g,'$1 $2')
+    .replace(/([a-z0-9])([A-Z])/g,'$1 $2').replace(/[_.]+/g,' ')
+    .replace(/\s+/g,' ').trim().split(' ').map(w=>/^(?:api|ui|rpa|oms|erp|crm|sap|hr|id|po|xml|sql|pdf|url|ocr)$/i.test(w)?w.toUpperCase():/^[A-Z]{2,}$/.test(w)?w:w.toLowerCase()).join(' ');
+}
+function scenarioSource(g){
+  const condition=String(g.condition ?? String(g.plainOrig||g.name||'').replace(/\?$/,''));
+  return { condition, complete:!!condition && (g.condition!=null || !condition.includes('…')), workflow:g.source?.xaml||'', label:g.conditionLabel||'' };
+}
+function describeScenarioCondition(source, truth){
+  const ast=parseScenarioCondition(source);
+  if(!ast) return {text:'Technical condition requires source review',supported:false};
+  const subject=id=>{
+    const words=scenarioWords(id);
+    if(/ next route$/.test(words)) return 'next '+words.replace(/ next route$/,'')+' step';
+    if(/ result$/.test(words)) return words.replace(/ result$/,'')+' check result';
+    return words;
+  };
+  const literal=n=>n.kind==='string'?'“'+n.value+'”':String(n.value);
+  const bool=(id,on)=>{
+    let words=scenarioWords(id);
+    if(words.startsWith('is ')) return words.slice(3)+' is '+(on?'true':'false');
+    const m=words.match(/^(.+) (usable|accepted|reconciled|available|complete|valid|approved|empty|ready|found|duplicate|withdrawn|expired|required|received)$/);
+    if(m) return m[1]+' is '+(on?'':'not ')+m[2];
+    return words+' is '+(on?'true':'false');
+  };
+  const render=(n,on,level=0)=>{
+    if(level>80) throw Error('depth');
+    if(n.type==='not') return render(n.child,!on,level+1);
+    if(n.type==='and'||n.type==='or'){
+      const op=on?n.type:n.type==='and'?'or':'and';
+      return '('+render(n.left,on,level+1)+' '+op+' '+render(n.right,on,level+1)+')';
+    }
+    if(n.type==='id') return bool(n.value,on);
+    if(n.type==='literal' && n.kind==='boolean') return 'constant condition is '+n.value+' (this path requires '+on+')';
+    if(n.type==='eq'||n.type==='ne'){
+      const equal=n.type==='eq'?on:!on;
+      const pair=n.left.type==='literal' && n.right.type==='id'?[n.right,n.left]:[n.left,n.right];
+      if(pair[0].type!=='id') throw Error('literal comparison');
+      if(pair[1].type==='literal' && pair[1].kind==='boolean') return bool(pair[0].value,equal?pair[1].value:!pair[1].value);
+      return subject(pair[0].value)+' is '+(equal?'':'not ')+(pair[1].type==='id'?subject(pair[1].value):literal(pair[1]));
+    }
+    throw Error('unsupported');
+  };
+  try{
+    let text=render(ast,truth);
+    if(text.startsWith('(')&&text.endsWith(')')) text=text.slice(1,-1);
+    return {text:text.charAt(0).toUpperCase()+text.slice(1),supported:true};
+  }catch(e){ return {text:'Technical condition requires source review',supported:false}; }
+}
+
+function enumerateScenarioPaths(gws, cap=24){
+  const paths=[];
+  const rec=(i,asg)=>{
+    if(paths.length>cap) return;
+    if(i===gws.length){ paths.push({...asg}); return; }
+    const g=gws[i];
+    if(!(g.dec||[]).every(d=>asg[d.id]===d.br)){ rec(i+1,asg); return; }
+    for(const br of ['then','else']){ asg[g.decId]=br; rec(i+1,asg); }
+    delete asg[g.decId];
+  };
+  rec(0,{});
+  return paths.length>cap ? {partial:true,paths:gws.flatMap(g=>['then','else'].map(br=>({[g.decId]:br})))} : {partial:false,paths};
+}
+const scenarioAssignmentKey = a => a?JSON.stringify(Object.keys(a).sort().map(k=>[k,a[k]])):'';
+function describeScenarioPath(steps, assignment, partial=false){
+  const gateways=steps.filter(g=>g.kind==='gateway' && g.decision && !g.inline && assignment[g.decId]!==undefined);
+  const clauses=gateways.map(g=>{
+    const src=scenarioSource(g), truth=assignment[g.decId]==='then';
+    return {...src,truth,...describeScenarioCondition(src.condition,truth),id:g.decId};
+  });
+  const last=gateways[gateways.length-1];
+  const candidates=partial?[]:steps.filter(s=>s.kind!=='gateway' && !s.grp && !s.fw && s.branch!=='exception' && s.xamlTarget &&
+    (s.dec||[]).some(d=>d.id===last?.decId && d.br===assignment[d.id]) &&
+    (s.dec||[]).every(d=>assignment[d.id]===undefined || assignment[d.id]===d.br));
+  const focus=candidates[candidates.length-1];
+  let title=focus?.name || clauses[clauses.length-1]?.text || 'Process walkthrough';
+  title=title.replace(/^\s*(?:PDD\s+)?Steps?\s+\d+(?:\s*(?:[-–]|and|și|&)\s*\d+)*\s*[—:–-]\s*/i,'').replace(/^\s*[↳▸]+\s*/,'');
+  if(title.length>90) title=title.slice(0,88).replace(/\s+\S*$/,'')+'…';
+  return {title,clauses,partial,focus:focus?.name||'',assignment:{...assignment}};
+}
+
+/* Scenario details UI. Every business statement retains its exact condition
+   and the required True/False outcome, including unsupported older sessions. */
+function scenarioDetailsHtml(view){
+  if(!view) return '<p>'+esc(T('scn.choose'))+'</p>';
+  return '<p>'+esc(T('scn.assumptions'))+'</p>'+(view.partial?'<p>'+esc(T('scn.partial'))+'</p>':'')+
+    (view.focus?'<p><b>'+esc(T('scn.focus'))+'</b> '+esc(view.focus)+'</p>':'')+
+    '<ol class="scenario-proof">'+view.clauses.map(c=>'<li><b>'+esc(c.text)+'</b>'+
+      (!c.supported?'<div>'+esc(T('scn.unsupported'))+'</div>':'')+
+      (!c.complete?'<div>'+esc(T('scn.incomplete'))+'</div>':'')+
+      '<details><summary>'+esc(T('scn.source'))+' — '+(c.truth?'True / Then':'False / Else')+'</summary>'+
+      '<pre class="scenario-source">'+esc(c.condition)+'</pre><p>'+esc(c.workflow)+'</p>'+
+      (c.label?'<p>'+esc(T('scn.authored'))+' '+esc(c.label)+'</p>':'')+'</details></li>').join('')+'</ol>';
+}
+function renderScenarioDetails(){
+  $('scenarioTitle').textContent=S.scnLabel||T('tb.scenario');
+  $('scenarioBody').innerHTML=scenarioDetailsHtml(S.scnDescription);
+}
+$('btnScenarioDetails').addEventListener('click',()=>{ renderScenarioDetails(); $('scenarioMask').classList.add('on'); });
+$('scenarioClose').addEventListener('click',()=>$('scenarioMask').classList.remove('on'));
+$('scenarioMask').addEventListener('click',e=>{ if(e.target===$('scenarioMask')) $('scenarioMask').classList.remove('on'); });
+
 /* Scenario selector. One entry per root-to-leaf path through the inferred
    decisions (a decision only counts on paths where the branch it sits in was
    taken), so a process with four dependent decisions can yield five scenarios, not 16.
    Independent decisions in sequence multiply, so past a cap the list falls
    back to one entry per decision outcome. */
-function buildScenarios(){
+function buildScenarios(preserve=false){
+  const previous=preserve?scenarioAssignmentKey(S.scn):'';
   S.scn = null; S.scnLabel = '';
+  S.scnDescription=null;
   const gws = S.model.steps.filter(s=>s.kind==='gateway' && s.decision && !s.inline);
   const sel = $('selScn');
   S.scnList = [];
-  if(!gws.length){ $('scnWrap').style.display='none'; sel.innerHTML=''; return; }
-  const CAP = 24; let more = false;
-  (function rec(i, asg){
-    if(S.scnList.length >= CAP){ more = true; return; }
-    if(i===gws.length){ S.scnList.push({...asg}); return; }
-    const g = gws[i];
-    if(!(g.dec||[]).every(d=>asg[d.id]===d.br)){ rec(i+1, asg); return; }
-    for(const br of ['then','else']){ asg[g.decId]=br; rec(i+1, asg); }
-    delete asg[g.decId];
-  })(0, {});
-  const short = s => s.length>44 ? s.slice(0,44)+'…' : s;
-  const bare = g => g.name.replace(/\?$/,'');
-  if(more){
-    /* Several independent decisions multiply into more paths than a dropdown
-       can sensibly list (a real project had 6). Rather than silently dropping
-       paths, offer each decision's two outcomes on their own — every other
-       decision stays "all branches". */
-    S.scnList = []; S.scnLabels = [];
-    gws.forEach(g=>['then','else'].forEach(br=>{
-      S.scnList.push({ [g.decId]:br });
-      S.scnLabels.push((br==='then'?'Yes':'No')+' — '+short(bare(g))+' (this decision only)');
-    }));
-  } else {
-    /* a raw condition reads fine negated ("not files.Count = 1"); a plain-language
-       question does not ("not Is there one file?") — those get Yes:/No: instead */
-    S.scnLabels = S.scnList.map(a=>gws.filter(g=>a[g.decId]!==undefined)
-      .map(g=> g.plain && g.name===g.plain
-        ? (a[g.decId]==='then'?'Yes':'No')+': '+short(bare(g))
-        : (a[g.decId]==='then'?'':'not ')+short(bare(g))).join(' · '));
-  }
+  $('btnScenarioDetails').disabled=true;
+  if(!gws.length){ S.scnLabels=[]; S.scnViews=[]; $('scnWrap').style.display='none'; sel.innerHTML=''; return; }
+  const routes=enumerateScenarioPaths(gws);
+  S.scnList=routes.paths;
+  S.scnViews=S.scnList.map(a=>describeScenarioPath(S.model.steps,a,routes.partial));
+  S.scnLabels=S.scnViews.map(v=>v.title+(v.partial?' ('+T('scn.single')+')':''));
   sel.innerHTML = `<option value="">${esc(T('scn.all'))}</option>`+
-    S.scnList.map((a,i)=>`<option value="${i}" title="${esc(S.scnLabels[i])}">${i+1}. ${esc(S.scnLabels[i])}</option>`).join('');
+    S.scnList.map((a,i)=>`<option value="${i}" title="${esc(S.scnViews[i].clauses.map(c=>c.text).join(' → '))}">${i+1}. ${esc(S.scnLabels[i])}</option>`).join('');
   $('scnWrap').style.display = 'inline-flex';
+  const selected=previous?S.scnList.findIndex(a=>scenarioAssignmentKey(a)===previous):-1;
+  if(selected>=0){
+    sel.value=String(selected); S.scn=S.scnList[selected]; S.scnLabel=S.scnLabels[selected];
+    S.scnDescription=S.scnViews[selected]; $('btnScenarioDetails').disabled=false;
+  }
+  renderScenarioDetails();
 }
 $('selScn').addEventListener('change',e=>{
   const v = e.target.value;
   S.scn = v==='' ? null : S.scnList[+v];
   S.scnLabel = v==='' ? '' : S.scnLabels[+v];
+  S.scnDescription = v==='' ? null : S.scnViews[+v];
+  $('btnScenarioDetails').disabled=v==='';
+  renderScenarioDetails();
   reset();
 });
 $('selExc').addEventListener('change',e=>{
@@ -3227,7 +3426,9 @@ function parseXaml(fileName, text){
       wf.invokes.push(node);
     }
     if(t==='FlowDecision' || t==='If'){
-      node.cond = e.getAttribute('Condition')||''; wf.decisions.push(node);
+      const property=Array.from(e.children).find(c=>c.localName===t+'.Condition');
+      node.cond = e.getAttribute('Condition')||property?.textContent?.trim()||'';
+      wf.decisions.push(node);
     }
     if(t==='TryCatch') wf.tryCatches++;
     if(t==='Throw'){
@@ -3371,8 +3572,11 @@ const invokeName = (inv, child) => invokeLabel(inv, child).name;
    "repeat: For each folder". Lets a step say it only runs under a condition
    instead of looking like part of one unconditional sequence, which the flat
    step list otherwise cannot express. */
+function fullCond(cond){
+  return String(cond||'').trim().replace(/^\[([\s\S]*)\]$/,'$1').trim();
+}
 function cleanCond(cond){
-  const c = String(cond||'').replace(/^\[|\]$/g,'').replace(/\s+/g,' ').trim();
+  const c = fullCond(cond).replace(/\s+/g,' ');
   return c.length>110 ? c.slice(0,110)+'…' : c;
 }
 function whenOf(wf, node, withFlow){
@@ -3444,7 +3648,7 @@ function decOf(wf, node, owner){
     const p = wf.activities[n.parent]; if(!p) break;
     if(p.tag==='If' && (n.branch==='then' || n.branch==='else')){
       const other = branchStats(wf, p, n.branch==='then' ? 'else' : 'then');
-      out.unshift({ id: owner+'#'+p.idx, br:n.branch, cond:cleanCond(p.cond), wf:wf.file,
+      out.unshift({ id: owner+'#'+p.idx, br:n.branch, cond:fullCond(p.cond), label:p.name||'', wf:wf.file,
                     guard: other.thr>0 && other.inv===0, otherActs: other.acts });
     }
     n = p;
@@ -3574,124 +3778,235 @@ async function parsePddDocx(buf){
   const xml = files['word/document.xml'];
   if(!xml) throw new Error('word/document.xml not found — is this really a .docx?');
   const doc = new DOMParser().parseFromString(xml,'application/xml');
-  const body = doc.getElementsByTagName('w:body')[0] || doc.documentElement;
-  const txt = n => Array.from(n.getElementsByTagName('w:t')).map(t=>t.textContent).join('');
+  const nodes = (n, name) => Array.from(n.getElementsByTagName('*')).filter(e=>e.localName===name);
+  const attr = (n, name) => n?.getAttribute('w:'+name) || n?.getAttribute(name) ||
+    Array.from(n?.attributes||[]).find(a=>a.localName===name)?.value || '';
+  const body = nodes(doc,'body')[0] || doc.documentElement;
+  const txt = n => nodes(n,'p').length
+    ? nodes(n,'p').map(p=>nodes(p,'t').map(t=>t.textContent).join('')).join('\n')
+    : nodes(n,'t').map(t=>t.textContent).join('');
+  const styles = {};
+  if(files['word/styles.xml']){
+    const sd = new DOMParser().parseFromString(files['word/styles.xml'],'application/xml');
+    nodes(sd,'style').forEach(s=>{
+      styles[attr(s,'styleId')] = { name:attr(nodes(s,'name')[0],'val'),
+        based:attr(nodes(s,'basedOn')[0],'val'), outline:attr(nodes(s,'outlineLvl')[0],'val') };
+    });
+  }
+  const headingLevel = (id, seen=new Set()) => {
+    if(!id || seen.has(id)) return 0;
+    seen.add(id);
+    const s=styles[id]||{}, m=(s.name||id).match(/^(?:heading|titlu|titre|uberschrift)\s*([1-9])$/i);
+    if(m) return +m[1];
+    if(s.outline!==undefined && s.outline!=='' && +s.outline<9) return +s.outline+1;
+    return headingLevel(s.based,seen);
+  };
 
   const blocks = [];
   for(const ch of Array.from(body.children)){
     if(ch.localName==='p'){
-      const st = ch.getElementsByTagName('w:pStyle')[0];
-      const style = st ? st.getAttribute('w:val')||'' : '';
+      const style = attr(nodes(ch,'pStyle')[0],'val');
+      const outline = attr(nodes(ch,'outlineLvl')[0],'val');
       const t = txt(ch).trim();
       if(t) blocks.push({ kind:'p', style, text:t,
-        heading: /^heading(\d)$/i.test(style) ? +style.replace(/\D/g,'') : 0 });
+        heading: outline!=='' && +outline<9 ? +outline+1 : headingLevel(style) });
     } else if(ch.localName==='tbl'){
-      const rows = Array.from(ch.getElementsByTagName('w:tr'))
+      const rows = nodes(ch,'tr')
         .filter(tr=>tr.parentNode===ch)
-        .map(tr=>Array.from(tr.getElementsByTagName('w:tc'))
+        .map(tr=>nodes(tr,'tc')
           .filter(tc=>tc.parentNode===tr).map(tc=>txt(tc).trim()));
       if(rows.length) blocks.push({ kind:'tbl', rows, header:rows[0] });
     }
   }
 
-  /* --- table classification: content-driven, not tied to any one PDD
-     template's exact heading numbers or wording. Column position matters as
-     much as the keyword: a plain "excep" match anywhere in a header row also
-     fires on an unrelated "scenario type (positive/negative/exception)"
-     column in a test-case table, so the exception/step checks are anchored
-     to the specific column the two real PDDs tested against always use for
-     it (first column = exception name; first column = step number). The
-     intervention keyword has not shown that collision, so it stays a
-     look-anywhere-in-the-header check. Keywords cover both the Romanian
-     template this was built against and plain English, since neither is
-     assumed going forward. ------------------------------------------------ */
-  const tableKind = t => {
-    const header = t.header||[];
-    if(/^(denumirea?\s+(a\s+)?)?excep/i.test((header[0]||'').trim())) return 'exception';
-    if(header.some(h=>/^(tip\s+)?interven/i.test((h||'').trim()))) return 'intervention';
-    if(/pas|step/i.test(header[0]||'') && header.some(h=>/^descr/i.test((h||'').trim()))) return 'step';
-    return null;
-  };
+  return parsePddBlocks(blocks);
+}
 
-  /* sections: any heading — numbered "x.y[.z]" or not — immediately followed
-     (before the next heading, of any level) by a step table. Formal PDDs
-     that compare an AS-IS state to a TO-BE one routinely reuse the exact
-     same step-table shape for both, so a section only qualifies while the
-     most recently seen "AS-IS"/"TO-BE" marker (in either language, at any
-     heading level — real documents are not consistent about which level
-     they use for this) says TO-BE or says nothing at all; once a heading
-     says AS-IS, everything under it is skipped until a TO-BE marker is
-     seen. A document with no such split keeps every section, since regime
-     starts, and stays, unset. */
-  const sections = [];
-  let regime = null, unnumberedCount = 0;
-  blocks.forEach((b,i)=>{
-    if(b.kind==='p' && b.heading){
-      if(/to[\s-]?be/i.test(b.text)) regime = 'tobe';
-      else if(/as[\s-]?is/i.test(b.text)) regime = 'asis';
+/* Pure normalisation stage: shared by DOCX import and dependency-free tests.
+   Headings establish scope; semantic column names establish field positions.
+   No business/system class or implemented human activity is invented. */
+function parsePddBlocks(blocks){
+  const normText = s => String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase().replace(/[–—_-]/g,' ').replace(/\s+/g,' ').trim();
+  const cell = (r,i) => i<0 ? '' : String(r[i]||'').trim();
+  const result = { kind:'pdd-docx',
+    meta:{ code:'', name:'', version:'', date:'', author:'', desc:'', institution:'' },
+    sections:[], exceptions:[], exceptionStates:[], interventions:[], rules:[],
+    constraints:[], apps:[], outofscope:[], notifications:[], testCases:[], ops:{},
+    diagnostics:{ tables:[], warnings:[] }, _blocks:blocks.length, _tables:0 };
+  let path=[], caption='', table=0;
+  const seenExceptions=new Map();
+  for(const b of blocks){
+    if(b.kind==='p'){
+      if(b.heading){
+        path=path.filter(h=>h.level<b.heading);
+        path.push({ level:b.heading, text:b.text });
+        caption='';
+      } else if(/^(?:table|tabel(?:ul)?)\s+\d+\s*[:.]/i.test(b.text)) caption=b.text;
+      if(!result.meta.name && /^(?:title|titlu)$/i.test(b.style||'')) result.meta.name=b.text;
+      continue;
     }
-    if(b.kind!=='p' || !b.heading || regime==='asis') return;
-    const m = b.text.match(/^\s*(\d+(?:\.\d+){1,3})\s+(.*)$/);
-    const stepTables = [];
-    for(let j=i+1; j<blocks.length; j++){
-      const n = blocks[j];
-      if(n.kind==='p' && n.heading) break;
-      if(n.kind==='tbl' && tableKind(n)==='step') stepTables.push(n);
-    }
-    if(!stepTables.length) return;
-    /* One heading can introduce several separate step tables. Treating them
-       as one section would create a single large blob that the mapping screen
-       could pair with only one XAML step. Each table therefore becomes its
-       own section; the common one-heading/one-table shape is unaffected. */
-    const baseTitle = (m ? m[2] : b.text).trim();
-    const baseRef = m ? m[1] : 'S'+(++unnumberedCount);
-    stepTables.forEach((n,k)=>{
-      const suffix = stepTables.length>1 ? ' ('+(k+1)+'/'+stepTables.length+')' : '';
-      const sec = { ref: baseRef+(stepTables.length>1?'.'+(k+1):''),
-        idx:sections.length, title: baseTitle+suffix, steps:[] };
-      n.rows.slice(1).forEach(r=>{
-        if(!r[1]) return;
-        sec.steps.push({ ref:(r[0]||'').trim(), desc:r[1].trim(), detail:(r[2]||'').trim() });
+    if(b.kind!=='tbl') continue;
+    table++;
+    const header=(b.header||b.rows[0]||[]).map(normText);
+    const col = rx => header.findIndex(h=>rx.test(h));
+    const rows=b.rows.slice(1), heading=path.map(h=>h.text).join(' > ');
+    const last=path[path.length-1]?.text||'Untitled section';
+    const number=[...path].reverse().map(h=>h.text.match(/^(\d+(?:\.\d+)*)\.?\s+/)?.[1]).find(Boolean);
+    const source = row => ({ heading, table, caption, row });
+    const ref=number||'S'+table;
+    let regime=null;
+    path.forEach(h=>{
+      const t=normText(h.text);
+      if(/\bto be\b|\bfuture state\b|stare viitoare|starea viitoare|situatia viitoare/.test(t)) regime='tobe';
+      else if(/\bas is\b|\bcurrent state\b|stare actuala|starea actuala|situatia actuala/.test(t)) regime='asis';
+    });
+    const desc=col(/^(?:descriere|description)\b|^(?:step|activity) description$/);
+    const detail=col(/^(?:detalii|details?|informatii suplimentare)$/);
+    const nr=col(/^(?:#|nr\.?|nr\.?\s*(?:crt\.?|pas)|numar pas|step(?:\s*(?:no\.?|number))?|pas(?:ul)?(?:\s*nr\.?)?)$/);
+    const name=col(/^(?:bpmn element|element bpmn|step name|activity name|task name|denumire(?:a)?(?: activitatii| pasului)?|activitate|activity|task)$/);
+    const elementType=col(/^(?:element type|tip element)$/);
+    const exc=col(/^(?:(?:denumire|denumirea|nume)(?: a)?\s+)?(?:excep\S*|exception(?: name)?)$/);
+    const trigger=col(/^(?:trigger|declansator|pas(?:ul)?(?: procesului)?|step|process step)$/);
+    const action=col(/^(?:to be handling|target handling|actiune(?:a)?|action|handling|expected action|tratare)$/);
+    const asis=col(/^as is handling$/);
+    const params=col(/^(?:parametri(?:i)?|parameters?|conditii)$/);
+    const stateEntry=col(/^state on entry$/), stateResolution=col(/^state on resolution$/);
+    const intervention=col(/^(?:tip\s+)?interven\S*(?:.*)?$/);
+    const task=col(/^escalation point$/), taskActions=col(/^available actions/), taskRole=col(/^task sla\s*\/\s*assignee$/);
+    const rule=col(/^(?:rule id|id regula|cod regula)$/);
+    const system=col(/^(?:system|application|aplicatie|sistem)$/);
+    let kind='unrecognised';
+    if(exc>=0 && stateEntry>=0 && stateResolution>=0){
+      kind='exception-states';
+      rows.forEach((r,i)=>{ if(cell(r,exc)) result.exceptionStates.push({ name:cell(r,exc),
+        record:cell(r,col(/^affected record$/)), entry:cell(r,stateEntry), resolution:cell(r,stateResolution),
+        failure:cell(r,col(/^state on terminal failure$/)), source:source(i+2) }); });
+    } else if(exc>=0){
+      kind='exceptions';
+      rows.forEach((r,i)=>{
+        const nm=cell(r,exc); if(!nm) return;
+        const explicit=normText(cell(r,col(/^(?:class|type|tip|classification)$/))) || normText(last);
+        const cls=/\bbusiness\b|functional/.test(explicit) ? 'business' : /\bsystem\b|sistem/.test(explicit) ? 'system' : 'unknown';
+        const key=normText(nm)+'|'+cls, prev=seenExceptions.get(key);
+        const item={ id:'pd'+table+'_'+i, name:nm, cls, pas:cell(r,trigger), params:cell(r,params),
+          asis:cell(r,asis), action:cell(r,action), src:'pdd', source:source(i+2) };
+        if(prev){ (prev.references ||= []).push(item.source); }
+        else { result.exceptions.push(item); seenExceptions.set(key,item); }
       });
-      sections.push(sec);
-    });
+    } else if(task>=0 && taskActions>=0){
+      kind='human-tasks';
+      rows.forEach((r,i)=>{ if(cell(r,task)) result.interventions.push({ action:cell(r,task),
+        desc:cell(r,col(/^trigger and fields surfaced$/)), actions:cell(r,taskActions),
+        role:cell(r,taskRole), type:'documented-task', documentedOnly:true,
+        rights:'', limits:'', source:source(i+2) }); });
+    } else if(intervention>=0){
+      kind='interventions';
+      const ac=col(/^(?:actiune(?:a)?|action|activitate|activity)$/);
+      const role=col(/^(?:rol(?:ul)?|role|actor|responsabil)$/);
+      rows.forEach((r,i)=>{ if(cell(r,ac>=0?ac:0)) result.interventions.push({ action:cell(r,ac>=0?ac:0),
+        desc:cell(r,desc>=0?desc:1), type:cell(r,intervention), role:cell(r,role>=0?role:3),
+        rights:cell(r,col(/^(?:drepturi|rights|access rights)$/)), limits:cell(r,col(/^(?:limitari|limits|limitations)$/)), source:source(i+2) }); });
+    } else if(desc>=0 && (nr>=0 || name>=0)){
+      kind=regime==='asis'?'current-steps':'steps';
+      if(regime!=='asis'){
+        const typed=elementType>=0 && name>=0;
+        const sec={ ref:typed?ref+'.T'+table:ref, idx:result.sections.length,
+          title:last.replace(/^\d+(?:\.\d+)*\.?\s+/,''), source:source(1), steps:[], typed };
+        // Distinct tables under the same heading keep distinct, stable references.
+        if(result.sections.some(s=>s.ref===sec.ref)) sec.ref += '.T'+table;
+        rows.forEach((r,i)=>{
+          const text=cell(r,name>=0?name:desc); if(!text) return;
+          const rawType=cell(r,elementType), type=normText(rawType);
+          const kind=type.includes('gateway')?'gateway':type.includes('event')?'event':type.includes('exception')?'exception-route':'activity';
+          sec.steps.push({ ref:cell(r,nr)||String(i+1), desc:text,
+            detail:cell(r,name>=0?desc:detail), elementType:rawType, kind,
+            source:source(i+2) });
+        });
+        result.sections.push(sec);
+      }
+    } else if(rule>=0 && desc>=0){
+      kind='rules'; rows.forEach((r,i)=>{ if(cell(r,rule)) result.rules.push({ id:cell(r,rule), text:cell(r,desc), source:source(i+2) }); });
+    } else if(system>=0 && col(/^role in process$/)>=0){
+      kind='applications'; rows.forEach(r=>{ if(cell(r,system)) result.apps.push(cell(r,system)); });
+    } else if(col(/^out of scope$/)>=0){
+      kind='scope'; rows.forEach((r,i)=>{ const v=cell(r,col(/^out of scope$/)); if(v && v!=='�' && v!=='—') result.outofscope.push({ activity:v, reason:'', impact:'', source:source(i+2) }); });
+    } else if(col(/^constraint$/)>=0 && col(/^detail$/)>=0){
+      kind='constraints'; rows.forEach((r,i)=>result.constraints.push({ name:cell(r,col(/^constraint$/)), text:cell(r,col(/^detail$/)), source:source(i+2) }));
+    } else if(col(/^field$/)>=0 && col(/^value$/)>=0){
+      kind='metadata'; rows.forEach(r=>{
+        const k=normText(cell(r,col(/^field$/))), v=cell(r,col(/^value$/));
+        if(/^(?:process name|nume proces|denumire proces)$/.test(k)) result.meta.name=v;
+        if(/^(?:process identifier|process code|cod proces)$/.test(k)) result.meta.code=v;
+      });
+    }
+    result.diagnostics.tables.push({ table, heading, caption, kind, rows:rows.length });
+    caption='';
+  }
+  result._tables=table;
+  if(!result.meta.name) result.meta.name=(blocks.find(b=>b.kind==='p' && !b.heading && !/^(?:table|tabel|contents)/i.test(b.text))||
+    blocks.find(b=>b.kind==='p' && b.heading===1) || {}).text||'';
+  result.exceptionStates.forEach(st=>{
+    const match=result.exceptions.find(e=>normText(e.name)===normText(st.name));
+    st.exceptionId=match?.id||null; // Uncertain synonyms remain unlinked for human review.
   });
+  result.mappingSections=result.sections.flatMap(s=>s.typed
+    ? s.steps.filter(st=>!['gateway','event'].includes(st.kind)).map(st=>({ ref:s.ref+'.'+st.ref,
+        title:st.desc, steps:[st], source:st.source, group:s.ref })) : [s]);
+  if(!result.sections.length) result.diagnostics.warnings.push('No target process step tables recognised. Review the document structure; missing sections are not proof of missing code.');
+  if(result.exceptions.some(e=>e.cls==='unknown')) result.diagnostics.warnings.push('Some exception types are unspecified in the PDD; business/system classification was not guessed.');
+  if(result.interventions.some(i=>i.documentedOnly)) result.diagnostics.warnings.push('Human-review tasks were read as requirements, not inserted as assumed executable gates.');
+  return result;
+}
 
-  /* exception tables: found by header content rather than by exact phrase or
-     file position. Business vs. system is read off the nearest preceding
-     heading when it names one explicitly (RO "business"/"funcțional"/
-     "sistem", EN "business"/"system"); a table whose heading is silent on
-     this falls back to the original template's convention of "first table
-     is business, the rest are system". */
-  let lastHeading = '';
-  const excTables = [];
-  blocks.forEach(b=>{
-    if(b.kind==='p' && b.heading){ lastHeading = b.text; return; }
-    if(b.kind==='tbl' && tableKind(b)==='exception') excTables.push({ t:b, heading:lastHeading });
-  });
-  const exceptions = [];
-  let unclassifiedSeen = 0;
-  excTables.forEach(({t,heading},ti)=>{
-    let cls = /business|funcțional|functional/i.test(heading) ? 'business'
-            : /sistem|system/i.test(heading) ? 'system' : null;
-    if(!cls){ cls = unclassifiedSeen===0 ? 'business' : 'system'; unclassifiedSeen++; }
-    t.rows.slice(1).forEach((r,i)=>{
-      if(!r[0]) return;
-      exceptions.push({ id:cls[0]+'d'+ti+'_'+i, name:r[0].trim(), cls,
-        pas:(r[1]||'').trim(), params:(r[2]||'').trim(), action:(r[3]||'').trim(), src:'pdd' });
-    });
-  });
+const pddSections = pdd => pdd?.mappingSections || pdd?.sections || [];
+const exceptionClassMatches = (documented, coded) => !documented || documented==='unknown' || documented===coded;
 
-  const intTable = blocks.find(b=>b.kind==='tbl' && tableKind(b)==='intervention');
-  const interventions = intTable ? intTable.rows.slice(1).filter(r=>r[0]).map(r=>({
-    action:r[0].trim(), desc:(r[1]||'').trim(), type:(r[2]||'').trim(),
-    role:(r[3]||'').trim(), rights:(r[4]||'').trim(), limits:(r[5]||'').trim() })) : [];
+function pddPromptContext(pdd, limit=12000){
+  if(!pdd) return '';
+  const ref = src => src ? `${src.heading}; table ${src.table}, row ${src.row}` : 'PDD';
+  const text = '\n\nDOCUMENTED REQUIREMENTS (not proof they are implemented):\n'+
+    (pdd.rules||[]).map(r=>`${r.id}: ${r.text} [${ref(r.source)}]`).join('\n')+
+    '\nConstraints / open decisions:\n'+(pdd.constraints||[]).map(r=>`${r.name}: ${r.text}`).join('\n')+
+    '\nDocumented exception target handling:\n'+(pdd.exceptions||[]).map(e=>`${e.name} [${e.cls||'unknown'}]: ${e.action} [${ref(e.source)}]`).join('\n')+
+    '\nDocumented human tasks:\n'+(pdd.interventions||[]).map(t=>`${t.action}: ${t.desc}; ${t.actions||''}; ${t.role} [${ref(t.source)}]`).join('\n')+
+    '\nDocumented target process:\n'+(pdd.sections||[]).flatMap(s=>s.steps.map(st=>`${s.ref}/${st.ref}: ${st.desc} (${st.elementType||'step'}) — ${st.detail} [${ref(st.source)}]`)).join('\n');
+  return text.length>limit ? text.slice(0,limit)+'\n[PDD context truncated to '+limit+' characters; consult the source document.]' : text;
+}
 
-  const title = (blocks.find(b=>b.kind==='p' && b.heading===1) || {}).text || '';
-  return { kind:'pdd-docx',
-    meta:{ code:'', name:title, version:'', date:'', author:'', desc:'', institution:'' },
-    sections, exceptions, interventions, outofscope:[], apps:[], notifications:[],
-    testCases:[], ops:{}, _blocks:blocks.length, _tables:blocks.filter(b=>b.kind==='tbl').length };
+function pddReadSummary(pdd){
+  if(!pdd) return '';
+  const sections=pdd.sections||[], tasks=pdd.interventions||[], rules=pdd.rules||[], states=pdd.exceptionStates||[];
+  const tables=pdd.diagnostics?.tables||[], warnings=pdd.diagnostics?.warnings||[];
+  const source = s => s ? `${s.heading} · ${s.caption||'table '+s.table} · row ${s.row}` : '';
+  const list = items => '<ul>'+items.map(i=>'<li>'+i+'</li>').join('')+'</ul>';
+  return `<details class="note pdd-readout"><summary><b>PDD readout / Conținut PDD</b> — ${esc(pdd.meta?.name||'PDD')}: `+
+    `${sections.length} sections, ${sections.reduce((n,s)=>n+s.steps.length,0)} elements, ${(pdd.exceptions||[]).length} exceptions, `+
+    `${states.length} state transitions, ${tasks.length} human tasks, ${rules.length} rules</summary>`+
+    `<p>Documented requirements are not evidence of implemented behaviour. Mappings need human confirmation.</p>`+
+    list(warnings.map(esc))+
+    `<details><summary>Target process</summary>`+sections.map(s=>`<h4>${esc(s.ref+' '+s.title)}</h4>`+
+      list(s.steps.map(st=>`${esc(st.ref+' '+st.desc)}${st.elementType?' ['+esc(st.elementType)+']':''} — ${esc(st.detail)}<br><small>${esc(source(st.source))}</small>`))).join('')+'</details>'+
+    `<details><summary>Business rules and open constraints</summary>`+list(rules.map(r=>`${esc(r.id+': '+r.text)}<br><small>${esc(source(r.source))}</small>`).concat((pdd.constraints||[]).map(r=>esc(r.name+': '+r.text))))+'</details>'+
+    `<details><summary>Human-review requirements</summary>`+list(tasks.map(t=>`${esc(t.action)} — ${esc(t.desc)} ${esc(t.actions||'')}<br>${esc(t.role)}<br><small>${esc(source(t.source))}</small>`))+'</details>'+
+    `<details><summary>Exception state transitions (not extra exceptions)</summary>`+list(states.map(s=>`${esc(s.name)}: ${esc(s.entry)} → ${esc(s.resolution)}; terminal: ${esc(s.failure)}<br><small>${esc(source(s.source))}</small>`))+'</details>'+
+    `<details><summary>Table diagnostics: ${tables.length} read, ${tables.filter(t=>t.kind==='unrecognised').length} not normalised</summary>`+
+    list(tables.map(t=>esc(`Table ${t.table}: ${t.kind} — ${t.caption||t.heading}`)))+'</details></details>';
+}
+
+function projectMappingSteps(c){
+  if(c.hasFramework) return c.spine.map((s,i)=>({ ...s, key:'b'+i }));
+  return (c.mainWf?.invokes||[]).map((inv,i)=>{
+    const targetKey=norm(stripExt(inv.target||'')), wf=c.wfByKey[targetKey];
+    return { ...inv, name:invokeName(inv,wf), targetKey, key:'m'+i };
+  }).filter(s=>s.target);
+}
+function attachPddSection(step, sec, index){
+  if(!sec) return;
+  step.pddRef=sec.ref; step.pddIdx=index;
+  step.pddDetail=sec.steps.map(s=>[s.desc,s.detail].filter(Boolean).join(' — ')).join('\n');
+  step.source.pdd=sec.ref+' '+sec.title;
+  step.detail=(step.detail||'').replace(' No matching PDD section was confirmed.','');
 }
 
 /* --- 10.4 BPMN (cross-check source) ---------------------------------- */
@@ -3971,7 +4286,8 @@ function inlineSteps(wf, owner, idPrefix, mixed){
       const dn = (a.name||'').trim();
       const q = dn && !/^flow\s*decision$/i.test(dn) ? dn : cleanCond(a.cond);
       out.steps.push({ id, kind:'gateway', decision:true, inline:true, actor:'system', ms:0, app:'',
-        name: /\?$/.test(q) ? q : q+'?', yesLabel:'Yes', noLabel:'No', nestDepth:p.depth,
+        name: /\?$/.test(q) ? q : q+'?', condition:fullCond(a.cond), conditionLabel:dn,
+        yesLabel:'Yes', noLabel:'No', nestDepth:p.depth,
         detail:'Decision in '+wf.file+': '+cleanCond(a.cond)+'.\nWhich steps follow each outcome is not simulated — the flow after it is listed in document order.',
         source:{ xaml: wf.file }, ...(mixed ? { _idx:a.idx } : {}) });
       return;
@@ -4203,7 +4519,7 @@ function detectProject(src){
 function addHumanSteps(c){
   const { pdd, steps } = c;
   /* ---- human entry point, from the PDD's intervention table ---- */
-  (pdd?.interventions||[]).forEach((iv,i)=>{
+  (pdd?.interventions||[]).filter(iv=>!iv.documentedOnly).forEach((iv,i)=>{
     steps.push({ id:'hum'+i, actor:'human', gate:true, ms:0,
       name: iv.action, app: iv.role || 'Operator',
       gatePrompt: iv.desc || iv.action,
@@ -4278,7 +4594,7 @@ function addSpineSteps(c){
   spine.forEach((sp,i)=>{
     const wf = wfByKey[sp.targetKey];
     const secIdx = mapping['b'+i];
-    const sec = (secIdx!=null && secIdx>=0) ? pdd?.sections?.[secIdx] : null;
+    const sec = (secIdx!=null && secIdx>=0) ? pddSections(pdd)[secIdx] : null;
     const logs = (wf?.logs||[]).map(l=>(l.msg||'').replace(/^\[|\]$/g,'')).filter(Boolean);
     const sub  = subActivities(wf);
     steps.push({
@@ -4298,7 +4614,7 @@ function addSpineSteps(c){
       xamlName: sp.name, xamlTarget: sp.target, resolved: !!wf, ext: sp.ext,
       when: sp.when || [], dec: sp.dec || [], args: sp.args || [],
       pddRef: sec ? sec.ref : null, pddIdx: secIdx,
-      pddDetail: sec ? (sec.steps.map((s,k)=>`${k+1}. ${s.desc}`).join('\n') || sec.title) : null,
+      pddDetail: sec ? (sec.steps.map((s,k)=>`${k+1}. ${s.desc}${s.detail?' — '+s.detail:''}`).join('\n') || sec.title) : null,
       source:{ pdd: sec ? sec.ref+' '+sec.title : '(no matching section)',
                xaml: 'Process.xaml → '+sp.name }
     });
@@ -4352,7 +4668,7 @@ function addFrameworkStatus(c){
 
 /* What the entry workflow invokes (and, without the framework, its titled sections). */
 function addEntrySteps(c){
-  const { src, gaps, steps, wfByKey, processWf, hasFramework, mainWf } = c;
+  const { src, gaps, steps, wfByKey, processWf, hasFramework, mainWf, pdd, mapping } = c;
   /* ---- anything else Main.xaml invokes directly ----
      Process.xaml and the named framework files are not the only things
      Main.xaml can call — a classic REFramework end-of-run block (build a
@@ -4391,11 +4707,14 @@ function addEntrySteps(c){
                        dec: decOf(mainWf, inv, 'main'), args: inv.args };
       const cd = mixedRes ? mixedRes.depthOf(inv) : 0;     /* titled sections around this invoke */
       const group = { idx:inv.idx, steps:[ makeNestedStep('m'+i, entry, { nestDepth:cd }) ] };
+      const secIdx=mapping['m'+i], sec=secIdx!=null && secIdx>=0 ? pddSections(pdd)[secIdx] : null;
+      attachPddSection(group.steps[0],sec,secIdx);
       mainStepOf[inv.idx] = 'm'+i;
       if(wf) mOwners.push({ wf, id:'m'+i });
       pushInvokeGaps(gaps, entry, mainLabel, src.otherFiles);
       if(wf) expandInvokes(wf, wfByKey, name, 0, undefined, 'm'+i).forEach((nested,j)=>{
         group.steps.push(makeNestedStep('m'+i+'_'+j, nested, mixedRes ? { nestDepth:(nested.depth||0)+1+cd } : {}));
+        attachPddSection(group.steps[group.steps.length-1],sec,secIdx);
         pushInvokeGaps(gaps, nested, nested.parentLabel, src.otherFiles);
       });
       mainGroups.push(group);
@@ -4520,7 +4839,7 @@ function inferGateways(c){
     steps.forEach(s=>{
       (s.dec||[]).forEach((d,j)=>{
         let m = meta[d.id];
-        if(!m){ m = meta[d.id] = { id:d.id, cond:d.cond, wf:d.wf, first:s,
+        if(!m){ m = meta[d.id] = { id:d.id, cond:d.cond, label:d.label||'', wf:d.wf, first:s,
                                     outer:[...s._pf, ...s.dec.slice(0,j)], then:[], else:[] }; order.push(m); }
         (d.br==='then' ? m.then : m.else).push(s.name);
         /* the OTHER branch, as seen from this step: if no step ever lands there it
@@ -4538,7 +4857,8 @@ function inferGateways(c){
     const inserts = new Map();
     order.forEach((m,k)=>{
       const gw = { id:'gd'+k, kind:'gateway', decision:true, decId:m.id, actor:'system', ms:0, app:'',
-        name: m.cond+'?', yesLabel:'Yes', noLabel:'No', nestDepth: m.first.nestDepth || 0,
+        name: cleanCond(m.cond)+'?', condition:m.cond, conditionLabel:m.label,
+        yesLabel:'Yes', noLabel:'No', nestDepth: m.first.nestDepth || 0,
         dec: m.outer.map(({id,br})=>({id,br})),
         detail:'Decision in '+m.wf+': '+m.cond+'.\nYes → '+
           (m.then.length ? names(m.then) : noSteps(m.thenActs))+
@@ -4695,7 +5015,7 @@ function addPddGaps(c){
     /* Text similarity only. Deliberately not the fuzzy title matcher: that one
        rewards any shared substring, which two Romanian sentences always have. */
     let best=null, bestScore=0;
-    thrown.forEach(t=>{ if(t.cls!==pe.cls) return;
+    thrown.forEach(t=>{ if(!exceptionClassMatches(pe.cls,t.cls)) return;
       const s = dice(t.message, pe.name); if(s>bestScore){ bestScore=s; best=t; } });
 
     if(bestScore>0.30){
@@ -4717,11 +5037,10 @@ function addPddGaps(c){
           'differs enough that this needs a human decision. Confirm whether the documented '+
           'exception and the coded one are the same case.' });
     } else {
-      gaps.push({ kind:'exc-unimplemented', sev:'hi', title:label, covKind:'documented', covIdx:peIdx,
-        detail:'Documented in the PDD as a '+pe.cls+' exception at step '+(pe.pas||'—')+', but '+
-          'no matching Throw activity was found in the supplied XAML. Either it is handled '+
-          'implicitly by the framework, implemented in a workflow that was not supplied, or '+
-          'it was never built.' });
+      gaps.push({ kind:'exc-unimplemented', sev:'md', title:label, covKind:'documented', covIdx:peIdx,
+        detail:'No matching Throw evidence was found for this documented exception (type: '+pe.cls+'). '+
+          'This does not prove missing implementation: branches, returned statuses, Catch handlers or '+
+          'external tasks may handle it. Review the workflow sources. '+(pe.action?'Target handling: '+pe.action:'') });
     }
   });
 
@@ -4729,7 +5048,7 @@ function addPddGaps(c){
   thrown.forEach((t,tIdx)=>{
     if(!pdd) return;   /* nothing to be undocumented against — see the no-pdd note below */
     let best=null, bestScore=0;
-    (pdd?.exceptions||[]).forEach(pe=>{ if(pe.cls!==t.cls) return;
+    (pdd?.exceptions||[]).forEach(pe=>{ if(!exceptionClassMatches(pe.cls,t.cls)) return;
       const s = dice(t.message, pe.name); if(s>bestScore){ bestScore=s; best=pe; } });
     if(bestScore>0.30) return;
     gaps.push({ kind: bestScore>0.16 ? 'exc-weak' : 'exc-undocumented',
@@ -4746,11 +5065,11 @@ function addPddGaps(c){
 
   /* ---- gaps: sections without an implementation ---- */
   const mapped = new Set(Object.values(mapping).filter(v=>v!=null && v>=0));
-  (pdd?.sections||[]).forEach((sec,i)=>{
-    if(!mapped.has(i)) gaps.push({ kind:'sec-unimplemented', sev:'hi',
+  pddSections(pdd).forEach((sec,i)=>{
+    if(!mapped.has(i)) gaps.push({ kind:'sec-unimplemented', sev:'md',
       title:sec.ref+' '+sec.title,
-      detail:'Described in the PDD with '+sec.steps.length+' step(s), but not matched to any '+
-        'workflow invoked from Process.xaml.' });
+      detail:'This documented requirement was not matched to an imported workflow during mapping. '+
+        'A missing or unconfirmed mapping is not proof that the requirement is unimplemented.' });
   });
   if(!pdd && xaml.length) gaps.push({ kind:'no-pdd', sev:'lo', info:true,
     title:'No PDD supplied',
@@ -4758,19 +5077,18 @@ function addPddGaps(c){
       'exceptions, workflows with no matching section, order) were not run — reporting every '+
       'exception as "undocumented" when no documentation exists would only be noise. Use ✦ Generate '+
       'PDD to draft one from the code.' });
-  spine.forEach((sp,i)=>{
+  projectMappingSteps(c).forEach(sp=>{
     if(!pdd) return;
-    if(mapping['b'+i]==null || mapping['b'+i]<0) gaps.push({ kind:'step-undocumented', sev:'md',
+    if(mapping[sp.key]==null || mapping[sp.key]<0) gaps.push({ kind:'step-undocumented', sev:'md',
       title:sp.name,
-      detail:'Invoked from Process.xaml but not matched to a PDD section. The robot does work '+
-        'the document does not describe.' });
+      detail:'This imported call has no confirmed PDD mapping. Review the sources before treating it as undocumented work.' });
   });
 
   /* ---- gaps: order mismatch ---- */
   const ordered = spine.map((_,i)=>mapping['b'+i]).filter(v=>v!=null && v>=0);
   for(let i=1;i<ordered.length;i++){
     if(ordered[i] < ordered[i-1]){
-      const a = pdd.sections[ordered[i]], b = pdd.sections[ordered[i-1]];
+      const a = pddSections(pdd)[ordered[i]], b = pddSections(pdd)[ordered[i-1]];
       gaps.push({ kind:'order', sev:'md', title:a.ref+' '+a.title,
         detail:'The PDD places this before '+b.ref+' '+b.title+', but Process.xaml runs it '+
           'after. The simulation follows the XAML, because that is what actually happens.' });
@@ -4790,16 +5108,16 @@ function exceptionCoverage(c){
   const coverage = {
     thrown: thrown.map(t=>{
       let best=null,sc=0;
-      (pdd?.exceptions||[]).forEach(pe=>{ if(pe.cls!==t.cls) return;
+      (pdd?.exceptions||[]).forEach(pe=>{ if(!exceptionClassMatches(pe.cls,t.cls)) return;
         const d=dice(t.message,pe.name); if(d>sc){sc=d;best=pe;} });
       return { code:t.code, text:t.message, cls:t.cls, wf:t.wf,
                best:best?best.name:null, score:sc, band:band(sc) };
     }),
     documented: (pdd?.exceptions||[]).map(pe=>{
       let best=null,sc=0;
-      thrown.forEach(t=>{ if(t.cls!==pe.cls) return;
+      thrown.forEach(t=>{ if(!exceptionClassMatches(pe.cls,t.cls)) return;
         const d=dice(t.message,pe.name); if(d>sc){sc=d;best=t;} });
-      return { text:pe.name+(pe.params?' — '+pe.params:''), cls:pe.cls, pas:pe.pas,
+      return { text:pe.name+(pe.action?' — '+pe.action:pe.params?' — '+pe.params:''), cls:pe.cls, pas:pe.pas,
                best: best ? ((best.code ? best.code+': ' : '') + best.message) : null,
                score:sc, band:band(sc) };
     })
@@ -4864,7 +5182,7 @@ function buildProjectModel(src){
   addPddGaps(c);
   const coverage = exceptionCoverage(c);
   const meta = buildMeta(c);
-  return { model:{ meta, steps:c.steps, exceptions:c.exceptions }, gaps:c.gaps, coverage };
+  return { model:{ meta, steps:c.steps, exceptions:c.exceptions, ...(c.pdd?{_pdd:c.pdd}:{}) }, gaps:c.gaps, coverage };
 }
 
 /* =====================================================================
@@ -5086,10 +5404,9 @@ async function processQueue(){
 
 /* stage 2: let the user confirm which PDD section each XAML step implements */
 function renderMapping(p){
-  const processWf = p.xaml.find(w=>norm(w.cls)==='process') ||
-                    p.xaml.find(w=>norm(stripExt(w.file))==='process');
-  const wfIdx = {}; p.xaml.forEach(w=>{ wfIdx[norm(stripExt(w.file))] = w; wfIdx[norm(w.cls)] = w; });
-  const spine = xamlSpine(processWf, wfIdx);
+  const context=detectProject({ xaml:p.xaml, pdd:p.pdd, mainFile:IMP.currentProjectMeta?.main });
+  const processWf=context.processWf;
+  const spine = projectMappingSteps(context), sections=pddSections(p.pdd);
   IMP.spine = spine; IMP.parsed = p;
 
   /* Building straight through with no confirmation step is correct for a
@@ -5100,7 +5417,7 @@ function renderMapping(p){
      hit this. Recorded here and surfaced once results are shown (finishBatch
      for a batch, immediately below for a lone project) rather than a modal
      per project, which would mean clicking through N alerts one at a time. */
-  if(!spine.length || !p.pdd?.sections?.length){
+  if(!spine.length || !sections.length){
     const reason = !spine.length
       ? (processWf ? T('imp.skipNoSpine') : T('imp.skipNoProcess'))
       : !p.pdd ? T('imp.skipNoPdd') : T('imp.skipNoSections');
@@ -5110,26 +5427,26 @@ function renderMapping(p){
     return;
   }
 
-  const sug = suggestMatches(spine, p.pdd.sections,
+  const sug = suggestMatches(spine, sections,
     x => (x.title||'') + ' ' + (x.name||'') + ' ' + (x.target||''));
   IMP.mapping = {};
-  spine.forEach((_,i)=>{ IMP.mapping['b'+i] = sug.has(i) ? sug.get(i) : -1; });
+  spine.forEach((sp,i)=>{ IMP.mapping[sp.key] = sug.has(i) ? sug.get(i) : -1; });
 
   const opts = i => ['<option value="-1">— '+T('map.none')+' —</option>']
-    .concat(p.pdd.sections.map((s,j)=>
-      `<option value="${j}" ${IMP.mapping['b'+i]===j?'selected':''}>${esc(s.ref+' '+s.title)}</option>`))
+    .concat(sections.map((s,j)=>
+      `<option value="${j}" ${IMP.mapping[spine[i].key]===j?'selected':''}>${esc(s.ref+' '+s.title)}</option>`))
     .join('');
 
   $('impList').innerHTML =
     (IMP.currentProjectMeta ? `<div class="hint" style="margin-bottom:6px">${T('proj.now')}
       <b>${esc(IMP.currentProjectMeta.name)}</b></div>` : '')+
-    `<div class="hint" style="margin-bottom:12px">${T('map.blurb')}</div>`+
+    pddReadSummary(p.pdd)+`<div class="hint" style="margin-bottom:12px">${T('map.blurb')}</div>`+
     spine.map((sp,i)=>`<div class="frow" style="align-items:flex-start;flex-direction:column;gap:5px">
       <div style="display:flex;gap:8px;width:100%;align-items:center">
         <span class="tp xaml">${i+1}</span>
         <span class="nm" title="${esc(sp.target)}"><b>${esc(sp.name)}</b></span>
         <span style="color:var(--dimmer);font-size:11px">${esc(base(sp.target))}</span></div>
-      <select data-map="b${i}" style="width:100%">${opts(i)}</select>
+      <select data-map="${sp.key}" style="width:100%">${opts(i)}</select>
     </div>`).join('');
 
   $('impList').querySelectorAll('select[data-map]').forEach(sel=>{
@@ -5361,7 +5678,7 @@ function setCoverageDecision(kind, idx, decision){
 function renderGaps(){
   const box=$('gapBody'); if(!box) return;
   if(!S.gaps.length && !S.coverage){ box.innerHTML=`<p class="hint">${T('gap.none')}</p>`; return; }
-  let html = `<p class="hint" style="margin-top:0">${T('gap.blurb')}</p>`;
+  let html = pddReadSummary(S.model._pdd)+`<p class="hint" style="margin-top:0">${T('gap.blurb')}</p>`;
 
   if(S.coverage && (S.coverage.thrown.length || S.coverage.documented.length)){
     html += `<div class="gsec"><h4>${T('cov.title')}
@@ -5986,6 +6303,13 @@ const STR = {
  en:{
   'tb.process':'Process','tb.importProj':'Import project…','tb.importModel':'Load session…',
   'tb.scenario':'Scenario','scn.all':'All branches (document order)',
+  'scn.details':'Branch details…','scn.choose':'Choose a scenario to inspect its branches.',
+  'scn.assumptions':'These are selected branch assumptions for the walkthrough, not evaluated runtime values. Route titles come from activity labels, not proof that the implementation is complete. Business wording does not replace the source condition.',
+  'scn.partial':'Only this decision is selected. All other decisions still show every branch.',
+  'scn.single':'one decision only','scn.focus':'Path focus:',
+  'scn.unsupported':'This expression is outside the supported Boolean syntax. Review the exact condition and required outcome below.',
+  'scn.incomplete':'The saved condition is empty or truncated. Re-import the project to recover the complete source; no missing text has been guessed.',
+  'scn.source':'Source condition and required outcome','scn.authored':'Author-supplied activity label (context only):',
   'tb.plain':'✦ Plain names','tb.plainChk':'Plain names (AI)',
   'plain.noLlm':'Plain names need the local model. Click the LLM chip in the top-right to connect LM Studio first.',
   'plain.none':'There are no imported steps or decisions to rename in this process.',
@@ -6028,15 +6352,15 @@ const STR = {
   'imp.skipNoPdd':'No PDD was supplied for this project, so there was nothing to confirm — built directly from the XAML.',
   'imp.skipNoSections':'The supplied PDD has no recognizable process-step sections, so there was nothing to confirm — built directly from the XAML.',
   'map.none':'no matching section','map.confirm':'Confirm & build',
-  'map.blurb':'Each workflow invoked from Process.xaml is listed in execution order. Confirm which PDD section it implements. Suggestions come from text similarity and are frequently wrong across languages — anything left unmatched is reported as a gap rather than guessed.',
+  'map.blurb':'Calls from the process or declared entry workflow are listed in document order. Confirm the corresponding PDD requirement. Suggestions are text matches, not verified coverage; review anything left unmatched.',
   'gap.title':'PDD ↔ XAML gap report','gap.export':'Export .md','gap.none':'No gaps detected.',
   'gap.blurb':'Differences between what the PDD describes and what the supplied XAML actually does.',
   'gap.g1':'Exceptions thrown in code but not documented',
   'gap.g1w':'The robot has behaviour the document does not describe, so the business has never agreed what should happen when these fire.',
-  'gap.g2':'Exceptions documented but not found in code',
-  'gap.g2w':'Either handled implicitly by the framework, implemented in a workflow that was not supplied, or not built.',
-  'gap.g3':'PDD sections with no matching implementation',
-  'gap.g3w':'Described in the document but not matched to any workflow invoked from Process.xaml.',
+  'gap.g2':'Documented exceptions without matching Throw evidence',
+  'gap.g2w':'Review required: handling may use branches, statuses, Catch handlers or external tasks. No matching Throw is not proof of missing implementation.',
+  'gap.g3':'PDD requirements without confirmed mappings',
+  'gap.g3w':'A missing mapping needs review; it is not proof that a documented requirement is unimplemented.',
   'gap.g4':'Workflows with no matching PDD section',
   'gap.g4w':'The robot does work the document does not describe.',
   'gap.g5':'Order differences',
@@ -6076,6 +6400,13 @@ const STR = {
  ro:{
   'tb.process':'Proces','tb.importProj':'Importă proiect…','tb.importModel':'Încarcă sesiune…',
   'tb.scenario':'Scenariu','scn.all':'Toate ramurile (în ordinea documentului)',
+  'scn.details':'Detalii ramuri…','scn.choose':'Alege un scenariu pentru a inspecta ramurile.',
+  'scn.assumptions':'Acestea sunt ipoteze selectate pentru prezentare, nu valori evaluate la rulare. Titlurile provin din etichetele activităților, nu dovedesc că implementarea este completă. Formularea simplificată nu înlocuiește condiția sursă.',
+  'scn.partial':'Este selectată doar această decizie. Celelalte decizii arată în continuare toate ramurile.',
+  'scn.single':'o singură decizie','scn.focus':'Punct de interes:',
+  'scn.unsupported':'Expresia nu este în sintaxa booleană suportată. Verifică mai jos condiția exactă și rezultatul necesar.',
+  'scn.incomplete':'Condiția salvată este goală sau trunchiată. Reimportă proiectul pentru sursa completă; textul lipsă nu a fost ghicit.',
+  'scn.source':'Condiția sursă și rezultatul necesar','scn.authored':'Eticheta autorului (doar context):',
   'tb.plain':'✦ Nume simple','tb.plainChk':'Nume simple (AI)',
   'plain.noLlm':'Numele simple au nevoie de modelul local. Apasă mai întâi chip-ul LLM din dreapta-sus pentru a conecta LM Studio.',
   'plain.none':'Nu există pași sau decizii importate de redenumit în acest proces.',
@@ -6118,15 +6449,15 @@ const STR = {
   'imp.skipNoPdd':'Nu a fost furnizat niciun PDD pentru acest proiect, deci nu a fost nimic de confirmat — construit direct din XAML.',
   'imp.skipNoSections':'PDD-ul furnizat nu are nicio secțiune de pași de proces recognoscibilă, deci nu a fost nimic de confirmat — construit direct din XAML.',
   'map.none':'nicio secțiune corespondentă','map.confirm':'Confirmă și construiește',
-  'map.blurb':'Fiecare workflow apelat din Process.xaml este listat în ordinea execuției. Confirmă ce secțiune din PDD implementează. Sugestiile provin din similaritate textuală și greșesc frecvent între limbi — ce rămâne nepotrivit este raportat ca diferență, nu ghicit.',
+  'map.blurb':'Apelurile din workflow-ul de proces sau de intrare sunt listate în ordinea documentului. Confirmă cerința PDD corespunzătoare. Sugestiile sunt potriviri de text, nu dovezi de acoperire; verifică elementele neasociate.',
   'gap.title':'Raport diferențe PDD ↔ XAML','gap.export':'Exportă .md','gap.none':'Nu s-au detectat diferențe.',
   'gap.blurb':'Diferențe între ce descrie PDD-ul și ce face efectiv codul XAML furnizat.',
   'gap.g1':'Excepții aruncate în cod, dar nedocumentate',
   'gap.g1w':'Robotul are un comportament pe care documentul nu îl descrie, deci business-ul nu a agreat niciodată ce trebuie să se întâmple.',
-  'gap.g2':'Excepții documentate, dar negăsite în cod',
-  'gap.g2w':'Fie sunt tratate implicit de framework, fie sunt implementate într-un workflow nefurnizat, fie nu au fost construite.',
-  'gap.g3':'Secțiuni PDD fără implementare corespondentă',
-  'gap.g3w':'Descrise în document, dar nepotrivite cu niciun workflow apelat din Process.xaml.',
+  'gap.g2':'Excepții documentate fără dovadă Throw corespondentă',
+  'gap.g2w':'Necesită verificare: tratarea poate folosi ramuri, stări, Catch sau sarcini externe. Lipsa unui Throw nu dovedește lipsa implementării.',
+  'gap.g3':'Cerințe PDD fără asocieri confirmate',
+  'gap.g3w':'O asociere lipsă necesită verificare; nu dovedește că cerința nu este implementată.',
   'gap.g4':'Workflow-uri fără secțiune PDD corespondentă',
   'gap.g4w':'Robotul execută activități pe care documentul nu le descrie.',
   'gap.g5':'Diferențe de ordine',
@@ -6181,6 +6512,7 @@ function applyLang(){
   if(ph[1]) ph[1].textContent = T('pane.tl');
   $('btnBrief').textContent = T('pane.brief');
   { const o = $('selScn') && $('selScn').options[0]; if(o && o.value==='') o.textContent = T('scn.all'); }
+  buildScenarios(true);
   document.querySelectorAll('.guide').forEach(g=>{
     g.style.display = g.dataset.lang===LANG ? '' : 'none'; });
   $('selLang').value = LANG;
