@@ -1,5 +1,7 @@
 # Import your project — video walkthrough
 
+[Open the live app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) · [Source repository](https://github.com/Dragos-cloud/uipath-rpa-project-simulator)
+
 [Watch or download the MP4 (2:46, 1080p)](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/uipath-rpa-project-simulator-demo.mp4) · [English subtitles](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/captions.srt) · [Release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)
 
 [![Walkthrough preview](preview.jpg)](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)

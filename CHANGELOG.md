@@ -11,6 +11,7 @@ All notable public-facing changes are documented here.
 - Added scenario polarity, grouping, source-retention, compatibility and selection regression tests.
 - Published an import-led, 2:46 walkthrough with actual local-AI responses, English captions and a persistent AI disclosure; the MP4 and subtitles are release assets linked from the README.
 - Updated the handbook and walkthrough guidance to distinguish documented requirements, source evidence, unsupported human waits and AI-generated review suggestions from completed implementation.
+- Enabled a public GitHub Pages app from the `main` branch root, with `.nojekyll`, a README launch link and hosted/local-AI setup guidance. Application version remains 0.61; hosting does not change its runtime code.
 
 ## 0.60 — 2026-10-21
 

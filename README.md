@@ -4,6 +4,8 @@ A dependency-free, browser-based tool for exploring your own UiPath RPA projects
 
 The application is a single static page: no build, server, or account is required.
 
+[**Open the live app**](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) · [Watch the walkthrough](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)
+
 An independent community tool developed by Dragos Marin. It is not affiliated with or endorsed by UiPath.
 
 ## Watch the walkthrough
@@ -25,9 +27,13 @@ The demo imports a synthetic, intentionally unfinished Customer Order Processing
 
 ## Run it
 
-Download or clone the repository, then open [index.html](index.html) in a current desktop browser.
+Open the [live GitHub Pages app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) in a current desktop browser. No installation or GitHub account is needed.
 
-For a hosted demo, publish the `main` branch with GitHub Pages using the repository root as the source.
+For a local/offline copy, download or clone the repository and open [index.html](index.html). The optional AI tools still require a separately configured model endpoint.
+
+This repository publishes automatically through GitHub Pages from the `main` branch, repository root (`/`). The `.nojekyll` file serves the existing static app without Jekyll processing. To host your own fork, enable **Settings → Pages → Deploy from a branch → main → / (root)**. Future pushes to that branch update the site; validation runs separately in GitHub Actions.
+
+The public site does not host a shared LLM or run imported UiPath workflows. A `localhost` LM Studio endpoint refers to the visitor's own computer; connection depends on their server, CORS configuration and browser access policy. Use a local copy if the browser blocks that connection.
 
 ## Start with your project
 

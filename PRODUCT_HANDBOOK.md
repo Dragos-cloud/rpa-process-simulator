@@ -18,6 +18,8 @@ It lets a reviewer:
 
 Parsing and simulation execute client-side. When an AI feature is enabled, the app sends process context to the LLM endpoint the user configures. A local endpoint keeps those requests on the machine; a remote endpoint may send them outside the machine or network. Use only an endpoint approved for the sensitivity of the imported material.
 
+**Hosted app:** [Open UiPath RPA Project Simulator](https://dragos-cloud.github.io/uipath-rpa-project-simulator/). GitHub Pages publishes the static repository root from `main`; `.nojekyll` disables Jekyll processing. Pushes update the site, while the existing validation workflow reports checks separately. No server-side project execution or shared AI service is introduced. Visitors who use local AI must run and configure their own endpoint; browser/CORS restrictions may require using a local copy instead.
+
 ### Primary users
 - **Business analysts** documenting or validating a TO-BE process.
 - **RPA developers** cross-checking that what they built matches what was signed off.

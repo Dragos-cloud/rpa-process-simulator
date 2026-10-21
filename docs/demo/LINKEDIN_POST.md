@@ -13,7 +13,9 @@ Optional local AI through LM Studio adds briefings, activity explanations and pr
 
 Bring your own project—or start with the included training examples.
 
-Explore the open-source app: https://github.com/Dragos-cloud/uipath-rpa-project-simulator
+Try the app: https://dragos-cloud.github.io/uipath-rpa-project-simulator/
+
+Source code and walkthrough video: https://github.com/Dragos-cloud/uipath-rpa-project-simulator
 
 Independent community tool; not affiliated with or endorsed by UiPath.
 
