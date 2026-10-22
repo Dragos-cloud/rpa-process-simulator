@@ -1,4 +1,8 @@
-# Import your project — video walkthrough
+# Historical v0.61 walkthrough — RPA Project Simulator
+
+**Branding status:** this recording uses the former name, "UiPath RPA Project Simulator," in screenshots, titles and narration. It is preserved unchanged for the v0.61 release, not presented as the current-brand promotional cut. See the [video refresh plan](../BRANDING.md#video-decision). The v0.63 app is named RPA Project Simulator; the existing public URLs below have not changed.
+
+UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. RPA Project Simulator is an independent community tool, not affiliated with, sponsored by, or endorsed by UiPath. No permission or certification is claimed.
 
 [Open the live app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) · [Source repository](https://github.com/Dragos-cloud/uipath-rpa-project-simulator)
 
@@ -36,6 +40,6 @@ The video has AI-generated narration using ElevenLabs and AI-assisted production
 
 The MP4 and subtitles live in the GitHub release to avoid putting large binary production assets in Git history. Previous video cuts, voice files, credentials, raw model responses and private code-review notes are not published.
 
-See the [LinkedIn post draft](LINKEDIN_POST.md). Publishing the repository or release does not post anything to LinkedIn.
+See the [new-brand LinkedIn post draft](LINKEDIN_POST.md), which should accompany a refreshed video rather than silently relabelling this older cut. Publishing the repository or release does not post anything to LinkedIn.
 
-Independent community tool developed by Dragos Marin; not affiliated with or endorsed by UiPath.
+Independent community tool developed by Dragos Marin; not affiliated with, sponsored by, or endorsed by UiPath.

@@ -2,6 +2,15 @@
 
 All notable public-facing changes are documented here.
 
+## 0.63 — 2026-10-22
+
+- Renamed the app and current documentation to RPA Project Simulator, separating the product name from descriptive UiPath™ import support.
+- Added English/Romanian trademark-owner and non-affiliation notices in the guide, footer, README and current promotional draft; no permission or compatibility certification is claimed.
+- Preserved browser settings, saved-session schema and import/export behavior. The footer remains in page flow rather than overlaying the app.
+- Kept the v0.61 video/release intact and labelled it historical; documented a refresh plan for the neutral branding instead of regenerating media or speech.
+- Prepared a repository/Pages rename checklist without changing GitHub, origin, existing public URLs or the local project folder.
+- Added four branding regression tests.
+
 ## 0.62 — 2026-10-22
 
 - Replaced the single scrolling User Guide with eight topic tabs in English and Romanian, keeping navigation visible while the selected topic scrolls.

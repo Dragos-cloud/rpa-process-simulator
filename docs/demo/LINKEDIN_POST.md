@@ -1,6 +1,10 @@
-Your UiPath project does not have to be finished before it becomes useful to discuss.
+<!-- New-brand draft. Use with a refreshed video after destination URLs are verified. Current links intentionally retain the existing public repository. -->
 
-In this short walkthrough, I import a synthetic customer-order project—with its PDD and intentionally incomplete code—into UiPath RPA Project Simulator.
+Your automation project does not have to be finished before it becomes useful to discuss.
+
+RPA Project Simulator is an independent tool for exploring supported UiPath™ project files and PDDs. It creates review and training walkthroughs; it does not execute workflows or certify project compatibility.
+
+The demonstration uses a synthetic customer-order project with its PDD and intentionally incomplete code.
 
 The goal is a shared view:
 
@@ -17,7 +21,7 @@ Try the app: https://dragos-cloud.github.io/uipath-rpa-project-simulator/
 
 Source code and walkthrough video: https://github.com/Dragos-cloud/uipath-rpa-project-simulator
 
-Independent community tool; not affiliated with or endorsed by UiPath.
+UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. Independent community tool; not affiliated with, sponsored by, or endorsed by UiPath.
 
 AI disclosure: AI-assisted video with AI-generated narration. Screens show actual app captures and local-model responses.
 

@@ -1,13 +1,13 @@
-# UiPath RPA Project Simulator — Product Handbook
+# RPA Project Simulator — Product Handbook
 
-**Version covered:** 0.62 — the number is the `APP_VERSION` constant, shown next to the app name in the header (as implemented in [`index.html`](index.html)). Bump it on every code change so the running app identifies what it contains; the release notes are in [CHANGELOG.md](CHANGELOG.md).
+**Version covered:** 0.63 — the number is the `APP_VERSION` constant, shown next to the app name in the header (as implemented in [`index.html`](index.html)). Bump it on every code change so the running app identifies what it contains; the release notes are in [CHANGELOG.md](CHANGELOG.md).
 **Format:** a single self-contained HTML file — no build step, no server, no external dependencies. Opens directly in a browser.
 
 ---
 
 ## 1. What this product is
 
-A browser-based tool that turns an imported UiPath RPA project (workflows plus an optional process design document) into an interactive model for business analysts, RPA developers, stakeholders, and trainers. The main workflow starts with **Import project…**; the included samples demonstrate the controls. The model is an interpretation of the supplied material, not execution of the original project.
+RPA Project Simulator is an independent browser-based tool that turns supported UiPath™ project files (workflows plus an optional process design document) into an interactive review model for business analysts, RPA developers, stakeholders, and trainers. The main workflow starts with **Import project…**; the included samples demonstrate the controls. The model interprets supplied material; it does not execute workflows or certify project compatibility.
 
 It lets a reviewer:
 
@@ -18,7 +18,7 @@ It lets a reviewer:
 
 Parsing and simulation execute client-side. When an AI feature is enabled, the app sends process context to the LLM endpoint the user configures. A local endpoint keeps those requests on the machine; a remote endpoint may send them outside the machine or network. Use only an endpoint approved for the sensitivity of the imported material.
 
-**Hosted app:** [Open UiPath RPA Project Simulator](https://dragos-cloud.github.io/uipath-rpa-project-simulator/). GitHub Pages publishes the static repository root from `main`; `.nojekyll` disables Jekyll processing. Pushes update the site, while the existing validation workflow reports checks separately. No server-side project execution or shared AI service is introduced. Visitors who use local AI must run and configure their own endpoint; browser/CORS restrictions may require using a local copy instead.
+**Hosted app:** [Open the live app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/). The app name is RPA Project Simulator; repository/Pages URL renaming remains pending separate approval. GitHub Pages publishes the static repository root from `main`; `.nojekyll` disables Jekyll processing. No server-side project execution or shared AI service is introduced. Visitors who use local AI must run and configure their own endpoint; browser/CORS restrictions may require using a local copy instead.
 
 ### Primary users
 - **Business analysts** documenting or validating a TO-BE process.
@@ -26,7 +26,7 @@ Parsing and simulation execute client-side. When an AI feature is enabled, the a
 - **Stakeholders** reviewing the process, responsibilities, and exceptions in business language.
 - **Trainers / delivery leads** running walkthroughs and workshops from project material.
 
-This is an independent community tool developed by Dragos Marin, with no affiliation with or endorsement by UiPath.
+This is an independent community tool developed by Dragos Marin, not affiliated with, sponsored by, or endorsed by UiPath. UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. Platform names identify supported source formats/interoperability, not the app's publisher. No permission or certification is claimed. The footer and both guide languages carry notices. See the [branding checklist](docs/BRANDING.md) for publication and video-refresh decisions.
 
 ### Included example content
 Two hand-authored sample processes ship in the app (`SAMPLES.invoice`, `SAMPLES.onboarding`) for learning the controls before importing your own project:
@@ -37,7 +37,7 @@ The repository deliberately contains only the generic samples. Import a local co
 
 ### Public walkthrough
 
-The [2:46 import-led walkthrough](docs/demo/README.md) demonstrates a synthetic, deliberately incomplete Customer Order Processing project, readable branch details, PDD/source review, local-AI Brief me / Explain / Ask, and reusable review outputs. The predefined samples appear last as training examples. Video and subtitles are attached to the [v0.61 release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61); local filming sources and production intermediates are not included. The narration is AI-generated and disclosed on screen. Source-check examples are manual review observations, not claims of automated detection or runtime success.
+The [historical 2:46 v0.61 walkthrough](docs/demo/README.md) demonstrates a synthetic, deliberately incomplete Customer Order Processing project, PDD/source review, local-AI responses and reusable outputs. It still shows/speaks the former app name and is preserved unchanged; refresh it before promoting the neutral brand. Video and subtitles remain attached to the [v0.61 release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61). No video regeneration or new speech credits are part of this local rename. Source-check examples are manual review observations, not claims of automated detection or runtime success.
 
 ---
 
@@ -340,5 +340,5 @@ Unsupported expressions remain technical and require source review. Conditions a
 - **The model builder is a pipeline of named stages.** `buildProjectModel` (§11) is ~20 lines that call, in a fixed order, `detectProject → addHumanSteps → addFrameworkOpening → addSpineSteps → addInlineProcessSteps → addFrameworkStatus → addEntrySteps → addInlineMainSteps → addFrameworkClose → noteStepSources → markRepeatedCalls → inferGateways → addFlowNotes → collectThrownExceptions → addPddGaps → exceptionCoverage → buildMeta`. Each stage takes one context object `c` and appends to the shared `c.steps / c.exceptions / c.gaps`; the comment above the first stage lists what each does. The **order matters** (step order, gap order and every id depend on it) — add a stage in the right place and run the tests; do not reorder without a reason.
 - **Strict separation of concerns**: parsers (§10) never touch the DOM or global state; they emit plain data fragments. The model builder (§11) is the only place that turns those fragments into the canonical Process Model + gap list. Everything downstream (diagram, timeline, LLM prompts) reads only the Process Model, never the raw parsed sources — this is what makes samples and imported projects behave identically everywhere else in the app.
 - **Saved sessions are versioned.** `SCHEMA_VERSION` + `MIGRATIONS` (near the model-loading code) define the file format; change the shape of the model only together with a migration step and a version bump.
-- **Validation shipped in this repository:** GitHub Actions compiles the embedded JavaScript and runs 46 dependency-free Node tests in `tests/pdd-parser.test.cjs`, `tests/scenarios.test.cjs` and `tests/guide.test.cjs`. These cover supported PDD normalisation, compatibility, Boolean polarity, source retention, path selection, guide topic selection, keyboard navigation and language parity; they are not a browser end-to-end suite or a UiPath runtime test. Browser behavior, actual DOCX extraction, imports, mappings, generated documents and exports also require manual checks with anonymised data.
+- **Validation:** GitHub Actions is configured to compile the embedded JavaScript and run 50 dependency-free Node tests in `tests/pdd-parser.test.cjs`, `tests/scenarios.test.cjs`, `tests/guide.test.cjs` and `tests/branding.test.cjs`. These cover PDD normalisation, compatibility, Boolean polarity, source retention, path selection, guide navigation, language parity, neutral branding and notices. They are not a browser end-to-end suite or a UiPath runtime test. Actual imports, generated documents, exports and layout still require browser checks with anonymised data.
 - **`localStorage` is optional and guarded** (`store` helper) — the app degrades to in-memory settings if storage is blocked, and LLM API tokens are only persisted if the user explicitly opts in.

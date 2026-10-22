@@ -25,3 +25,5 @@ jobs:
         run: node --test tests/scenarios.test.cjs
       - name: Test guide navigation and language parity
         run: node --test tests/guide.test.cjs
+      - name: Test neutral branding and trademark notices
+        run: node --test tests/branding.test.cjs

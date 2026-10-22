@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Import a UiPath RPA project to explore workflows, review PDD gaps, rehearse exceptions and ask a local AI assistant. For business analysts, RPA developers, stakeholders and trainers.">
-<title>UiPath RPA Project Simulator</title>
+<meta name="description" content="RPA Project Simulator is an independent tool for exploring supported UiPath™ project files and PDDs, reviewing workflow evidence and using optional local AI. It does not execute workflows or certify compatibility.">
+<title>RPA Project Simulator</title>
 <style>
 :root{
   --bg:#0f1419; --panel:#161c23; --panel2:#1c242d; --line:#2a3541;
@@ -40,6 +40,7 @@ header{display:flex;align-items:center;gap:8px 16px;padding:6px 16px;flex-wrap:w
 main{flex:1;min-height:0;position:relative}
 .app-footer{width:100%;flex:0 0 auto;padding:5px 16px;text-align:center;
   background:var(--panel);border-top:1px solid var(--line);color:var(--dimmer);font-size:11px}
+.app-footer .trademark{max-width:1200px;margin:2px auto 0;font-size:10.5px;line-height:1.45}
 .view{position:absolute;inset:0;display:none;flex-direction:column}
 .view.on{display:flex}
 
@@ -289,7 +290,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
 <body>
 
 <header>
-  <div class="brand"><span id="appName">UiPath RPA Project Simulator</span> <span id="appVer" style="color:var(--dimmer);font-weight:400;font-size:11px"></span></div>
+  <div class="brand"><span id="appName">RPA Project Simulator</span> <span id="appVer" style="color:var(--dimmer);font-weight:400;font-size:11px"></span></div>
   <div class="tabs">
     <div class="tab on" data-view="sim">Simulator</div>
     <div class="tab" data-view="guide">User Guide</div>
@@ -407,7 +408,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
   <section class="view" id="view-guide"><div class="guide" id="guideBody" data-lang="en">
 
     <div class="guide-header">
-    <h1 id="guideTitleEN">UiPath RPA Project Simulator — User Guide</h1>
+    <h1 id="guideTitleEN">RPA Project Simulator — User Guide</h1>
     <p style="color:var(--dim)">Version <span id="guideVerEN"></span> · XAML and PDD import · gap report · local LLM</p>
     </div>
     <div class="guide-nav" role="tablist" aria-label="User guide topics">
@@ -424,12 +425,17 @@ input[type=range]{accent-color:var(--accent);width:100px}
     <section class="guide-panel" id="guide-panel-en-start" data-guide-panel="start" role="tabpanel" aria-labelledby="guide-tab-en-start" tabindex="0">
 
     <div class="note">
-      <b>Start with your project.</b> Import UiPath workflows and, optionally, a PDD to
+      <b>Start with your project.</b> Import supported UiPath™ workflow files and, optionally, a PDD to
       build a model for walkthroughs, exception reviews and documentation. Business analysts,
       RPA developers, stakeholders and trainers can explore the same project at different
       levels of detail. The built-in processes are examples for trying the controls.
       Parsing runs in this browser; optional AI features send context to your configured endpoint.
     </div>
+
+    <p class="hint">Independent community tool. UiPath™ is a trademark of UiPath, Inc. and UiPath SRL.
+      This project is not affiliated with, sponsored by, or endorsed by UiPath.
+      Import support is limited to the structures described in this guide; the app does not execute
+      workflows or certify compatibility.</p>
 
     <p><b>For your role:</b> BAs review documented requirements and gaps; RPA developers
       inspect workflow relationships and exception handling; stakeholders discuss the process
@@ -716,7 +722,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
   <div class="guide" data-lang="ro" style="display:none">
 
     <div class="guide-header">
-    <h1 id="guideTitleRO">UiPath RPA Project Simulator — Ghid de utilizare</h1>
+    <h1 id="guideTitleRO">RPA Project Simulator — Ghid de utilizare</h1>
     <p style="color:var(--dim)">Versiunea <span id="guideVerRO"></span> · import XAML și PDD · raport de diferențe · model LLM local</p>
     </div>
     <div class="guide-nav" role="tablist" aria-label="Subiecte din ghidul de utilizare">
@@ -733,12 +739,17 @@ input[type=range]{accent-color:var(--accent);width:100px}
     <section class="guide-panel" id="guide-panel-ro-start" data-guide-panel="start" role="tabpanel" aria-labelledby="guide-tab-ro-start" tabindex="0">
 
     <div class="note">
-      <b>Începe cu proiectul tău.</b> Importă workflow-uri UiPath și, opțional, un PDD pentru
+      <b>Începe cu proiectul tău.</b> Importă fișiere de workflow UiPath™ din structurile suportate și, opțional, un PDD pentru
       a construi un model pentru prezentări, analiza excepțiilor și documentare. Analiștii de
       business, dezvoltatorii RPA, stakeholderii și trainerii pot explora același proiect la
       niveluri diferite de detaliu. Procesele incluse sunt exemple pentru a încerca comenzile.
       Analiza rulează în browser; funcțiile AI opționale trimit context către endpoint-ul configurat.
     </div>
+
+    <p class="hint">Instrument comunitar independent. UiPath™ este o marcă a UiPath, Inc. și UiPath SRL.
+      Acest proiect nu este afiliat, sponsorizat sau susținut oficial de UiPath.
+      Importul este limitat la structurile descrise în ghid; aplicația nu execută workflow-uri
+      și nu certifică compatibilitatea.</p>
 
     <p><b>Pentru rolul tău:</b> BA verifică cerințe și diferențe față de PDD; dezvoltatorii RPA
       inspectează legături între workflow-uri și tratarea excepțiilor; stakeholderii discută
@@ -983,7 +994,10 @@ input[type=range]{accent-color:var(--accent);width:100px}
     </div>
   </div></section>
 </main>
-<footer class="app-footer">Developed by Dragos Marin</footer>
+<footer class="app-footer">
+  <div>Developed by Dragos Marin</div>
+  <div class="trademark" data-t="footer.notice">Independent community tool for supported UiPath™ project files. UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. Not affiliated with, sponsored by, or endorsed by UiPath.</div>
+</footer>
 
 <div class="mask" id="scenarioMask">
   <div class="modal" style="width:760px">
@@ -999,7 +1013,7 @@ input[type=range]{accent-color:var(--accent);width:100px}
       <button class="sm" id="impClose">✕</button></div>
     <div class="modal-bd">
       <p class="hint" style="margin-top:0" data-t="imp.blurb">
-        Select every file at once — UiPath <code>.xaml</code> workflows, coded
+        Select every file at once — supported UiPath™ <code>.xaml</code> workflows, coded
         <code>.cs</code> workflows, the PDD as <code>.json</code> or <code>.docx</code>, and a
         <code>.bpmn</code> diagram if you have one. Nothing is uploaded anywhere; all parsing
         happens in this browser.</p>
@@ -1186,8 +1200,8 @@ input[type=range]{accent-color:var(--accent);width:100px}
 /* Bump this on every code change — it's the one place that has to be
    touched, and it drives the header badge and the User Guide's version
    line in both languages, so nothing else needs editing to stay in sync. */
-const APP_NAME = 'UiPath RPA Project Simulator';
-const APP_VERSION = '0.62';
+const APP_NAME = 'RPA Project Simulator';
+const APP_VERSION = '0.63';
 
 /* Version of the saved-session format (the Process Model JSON written by
    "Save session"). Bump it ONLY when the shape of the model changes in a way
@@ -6473,7 +6487,7 @@ const STR = {
   'imp.drop':'Drop files here, or click to browse','imp.dropHint':'.xaml · .cs · .json · .docx · .bpmn',
   'imp.filesSel':'file(s) selected','imp.parsing':'Parsing…',
   'imp.errors':'Some files could not be parsed:','imp.nothing':'No XAML or PDD files were found.',
-  'imp.blurb':'Select every file at once — UiPath .xaml workflows, coded .cs workflows, the PDD as .json or .docx, and a .bpmn diagram if you have one. Nothing is uploaded anywhere; all parsing happens in this browser.',
+  'imp.blurb':'Select every file at once — supported UiPath™ .xaml workflows, coded .cs workflows, the PDD as .json or .docx, and a .bpmn diagram if you have one. Nothing is uploaded anywhere; all parsing happens in this browser.',
   'imp.dropFolderHint':'A dropped folder (and its subfolders) is scanned automatically.',
   'imp.browseFolder':'Or choose an entire folder…',
   'imp.ignored':'ignored (UiPath internal files)',
@@ -6535,7 +6549,8 @@ const STR = {
   'pane.ask':'❓ Ask','ask.title':'Ask about this project',
   'ask.label':'Your question',
   'ask.hint':'Answered from this process\'s own steps, exceptions and PDD mapping only — phase 1 of this feature asks fresh each time rather than remembering earlier questions, so include whatever context the question needs.',
-  'ask.send':'Ask'
+  'ask.send':'Ask',
+  'footer.notice':'Independent community tool for supported UiPath™ project files. UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. Not affiliated with, sponsored by, or endorsed by UiPath.'
  },
  ro:{
   'tb.process':'Proces','tb.importProj':'Importă proiect…','tb.importModel':'Încarcă sesiune…',
@@ -6570,7 +6585,7 @@ const STR = {
   'imp.drop':'Trage fișierele aici sau apasă pentru a naviga','imp.dropHint':'.xaml · .cs · .json · .docx · .bpmn',
   'imp.filesSel':'fișier(e) selectate','imp.parsing':'Se analizează…',
   'imp.errors':'Unele fișiere nu au putut fi analizate:','imp.nothing':'Nu s-au găsit fișiere XAML sau PDD.',
-  'imp.blurb':'Selectează toate fișierele deodată — workflow-uri UiPath .xaml, workflow-uri .cs, PDD-ul în format .json sau .docx și diagrama .bpmn dacă există. Nimic nu se încarcă pe internet; analiza se face integral în acest browser.',
+  'imp.blurb':'Selectează toate fișierele deodată — workflow-uri UiPath™ .xaml din structurile suportate, workflow-uri .cs, PDD-ul în format .json sau .docx și diagrama .bpmn dacă există. Nimic nu se încarcă pe internet; analiza se face integral în acest browser.',
   'imp.dropFolderHint':'Un folder tras aici (cu tot cu subfoldere) este scanat automat.',
   'imp.browseFolder':'Sau alege un folder întreg…',
   'imp.ignored':'ignorate (fișiere interne UiPath)',
@@ -6632,7 +6647,8 @@ const STR = {
   'pane.ask':'❓ Întreabă','ask.title':'Întreabă despre acest proces',
   'ask.label':'Întrebarea ta',
   'ask.hint':'Răspunsul folosește doar pașii, excepțiile și corespondența PDD ale acestui proces — faza 1 a acestei funcții pornește din nou de fiecare dată, fără să țină minte întrebările anterioare, așa că include în întrebare tot contextul necesar.',
-  'ask.send':'Întreabă'
+  'ask.send':'Întreabă',
+  'footer.notice':'Instrument comunitar independent pentru fișiere de proiect UiPath™ din structurile suportate. UiPath™ este o marcă a UiPath, Inc. și UiPath SRL. Proiectul nu este afiliat, sponsorizat sau susținut oficial de UiPath.'
  }
 };
 let LANG = store.get('rpasim.lang') || 'en';
