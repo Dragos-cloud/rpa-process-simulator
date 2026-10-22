@@ -35,11 +35,14 @@ test('rename keeps legacy browser keys and saved-session schema',()=>{
   assert.doesNotMatch(read('LICENSE'),/UiPath/);
 });
 
-test('historical video and pending repository rename are disclosed rather than silently rewritten',()=>{
+test('approved video, preserved archive and retained repository URLs are disclosed',()=>{
   const demo=read('docs/demo/README.md');
   assert.match(demo,/Historical v0\.61/);
   assert.match(demo,/preserved unchanged/);
   assert.match(demo,/releases\/download\/v0\.61\/uipath-rpa-project-simulator-demo\.mp4/);
   assert.match(read('docs/BRANDING.md'),/rpa-project-simulator/);
   assert.match(read('README.md'),/No GitHub rename or remote change has been made/);
+  assert.match(demo,/releases\/download\/v0\.63\/rpa-project-simulator-walkthrough-v063\.mp4/);
+  assert.match(read('README.md'),/Watch the walkthrough \(3:28\)/);
+  assert.match(read('docs/BRANDING.md'),/retain the existing repository name/);
 });

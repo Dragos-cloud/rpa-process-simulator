@@ -2,11 +2,11 @@
 
 An independent, dependency-free browser tool for exploring supported UiPath™ project files and process design documents (PDDs). Import supported workflow structures to build a review model, investigate documentation gaps and ask a local AI assistant about the supplied material. It does not execute UiPath workflows or certify project compatibility.
 
-**v0.63 branding update:** the app uses the neutral name RPA Project Simulator. The repository and Pages URLs below retain their existing addresses so current links continue to work. The proposed repository name is `rpa-project-simulator`; see the [branding and publication checklist](docs/BRANDING.md). No GitHub rename or remote change has been made.
+**v0.63:** the app uses the neutral name RPA Project Simulator. The repository and Pages URLs below are intentionally retained by the author; see the [branding and publication decisions](docs/BRANDING.md). No GitHub rename or remote change has been made.
 
 The application is a single static page: no build, server, or account is required.
 
-[**Open the live app**](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) · [Watch the walkthrough](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)
+[**Open the live app**](https://dragos-cloud.github.io/uipath-rpa-project-simulator/) · [Watch the walkthrough](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.63)
 
 An independent community tool developed by Dragos Marin. It is not affiliated with, sponsored by, or endorsed by UiPath.
 
@@ -16,15 +16,15 @@ UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. References identify sup
 
 This notice does not claim permission, approval or certification. It is not a substitute for any permission required for a particular use. See [UiPath's Trademark & Copyright Use Policy](https://www.uipath.com/assets/downloads/trademark-copyright-use-policy). The MIT license covers this project's code, not rights to third-party trademarks.
 
-## Previous-release walkthrough (v0.61)
+## Watch the walkthrough (3:28)
 
-[![Previous v0.61 walkthrough — uses the former app name](docs/demo/preview.jpg)](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61)
+[![RPA Project Simulator — one project, four perspectives](docs/demo/preview-v063.jpg)](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.63)
 
-[Watch or download the 2:46 video](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/uipath-rpa-project-simulator-demo.mp4) · [English subtitles](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.61/captions.srt) · [Walkthrough guide](docs/demo/README.md)
+[Watch or download the 3:28 video](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.63/rpa-project-simulator-walkthrough-v063.mp4) · [English subtitles](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/download/v0.63/captions.srt) · [Walkthrough guide](docs/demo/README.md)
 
-The demo imports a synthetic, intentionally unfinished Customer Order Processing project, reviews PDD-to-code evidence, and uses actual local-model briefings, explanations and questions. The predefined scenarios appear at the end as training examples. The video has AI-generated narration and a persistent AI disclosure; it does not show runtime execution or prove implementation completeness.
+The demo presents a shared view for business analysts, RPA developers, stakeholders and trainers. It imports a synthetic Customer Order Processing project, distinguishes **Scenario** from **Inject Exception**, reviews PDD-to-code evidence, and uses actual local-model briefings, explanations and questions. Its intentionally unfinished code illustrates review questions, not a restriction on the app's audience. Inspectors stay in app context, controls are highlighted, and the PDD/code comparison has dedicated reading time. Built-in processes appear at the end as training examples. The video has AI-generated narration and a persistent AI disclosure; it does not show runtime execution or prove implementation completeness.
 
-The existing recording is preserved unchanged and still shows/speaks the previous app name. It is a historical walkthrough, not the current branding. Update the screen captures, titles, opening/closing narration and trademark/non-affiliation notice before reusing it for the renamed app.
+The [historical v0.61 walkthrough](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61) is preserved unchanged with its former branding.
 
 ## Who it is for
 
@@ -75,7 +75,7 @@ This repository intentionally ignores imported workflows, PDDs, BPMN files, gene
 - [index.html](index.html) — complete application (HTML, CSS, JavaScript, and generic samples).
 - [PRODUCT_HANDBOOK.md](PRODUCT_HANDBOOK.md) — detailed product and maintenance reference.
 - [CHANGELOG.md](CHANGELOG.md) — public release notes.
-- [docs/BRANDING.md](docs/BRANDING.md) — neutral naming, trademark notices, pending repository rename and video refresh checklist.
+- [docs/BRANDING.md](docs/BRANDING.md) — neutral naming, trademark notices, retained repository URLs and video publication decisions.
 - [docs/demo/README.md](docs/demo/README.md) — video, chapter guide, source-check limitations and a matching LinkedIn post draft. The MP4 and captions are attached to the GitHub release rather than stored in Git history.
 
 ## Quality checks

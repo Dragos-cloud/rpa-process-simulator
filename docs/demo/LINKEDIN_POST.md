@@ -1,28 +1,26 @@
-<!-- New-brand draft. Use with a refreshed video after destination URLs are verified. Current links intentionally retain the existing public repository. -->
+<!-- Draft for the approved v0.63 video. Publication on GitHub does not post this to LinkedIn. -->
 
-Your automation project does not have to be finished before it becomes useful to discuss.
+One automation project. Four perspectives.
 
-RPA Project Simulator is an independent tool for exploring supported UiPath™ project files and PDDs. It creates review and training walkthroughs; it does not execute workflows or certify project compatibility.
+RPA Project Simulator brings supported UiPath™ workflow files and process documentation into a shared, interactive view:
 
-The demonstration uses a synthetic customer-order project with its PDD and intentionally incomplete code.
+- Business analysts review requirements and documentation gaps.
+- RPA developers investigate workflow routes and implementation evidence.
+- Stakeholders discuss responsibilities and intended outcomes.
+- Trainers guide walkthroughs using imported projects or built-in examples.
 
-The goal is a shared view:
+This 3:28 demo imports a synthetic customer-order project, distinguishes Scenario from Inject Exception, compares PDD intent with source evidence, and uses a local model for briefings, activity explanations and focused questions.
 
-- BAs compare documented intent with workflow evidence.
-- RPA developers explain routes and investigate what still needs work.
-- Stakeholders explore the process and human responsibilities.
-- Trainers turn project material into guided walkthroughs.
-
-Optional local AI through LM Studio adds briefings, activity explanations and project questions. Its answers support the review; they don't replace checking the sources.
-
-Bring your own project—or start with the included training examples.
+It models the supplied material; it does not execute the automation or certify completeness. AI answers and generated PDD drafts require human review.
 
 Try the app: https://dragos-cloud.github.io/uipath-rpa-project-simulator/
 
-Source code and walkthrough video: https://github.com/Dragos-cloud/uipath-rpa-project-simulator
+Source: https://github.com/Dragos-cloud/uipath-rpa-project-simulator
+
+Walkthrough: https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.63
 
 UiPath™ is a trademark of UiPath, Inc. and UiPath SRL. Independent community tool; not affiliated with, sponsored by, or endorsed by UiPath.
 
-AI disclosure: AI-assisted video with AI-generated narration. Screens show actual app captures and local-model responses.
+Video disclosure: AI-generated narration and AI-assisted production. Actual app captures and local-model responses; synthetic data.
 
-#UiPath #RPA #BusinessAnalysis #LocalAI #Automation
+#RPA #BusinessAnalysis #Automation #ProcessDesign #LocalAI #Training

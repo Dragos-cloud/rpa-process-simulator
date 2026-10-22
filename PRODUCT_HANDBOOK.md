@@ -18,7 +18,7 @@ It lets a reviewer:
 
 Parsing and simulation execute client-side. When an AI feature is enabled, the app sends process context to the LLM endpoint the user configures. A local endpoint keeps those requests on the machine; a remote endpoint may send them outside the machine or network. Use only an endpoint approved for the sensitivity of the imported material.
 
-**Hosted app:** [Open the live app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/). The app name is RPA Project Simulator; repository/Pages URL renaming remains pending separate approval. GitHub Pages publishes the static repository root from `main`; `.nojekyll` disables Jekyll processing. No server-side project execution or shared AI service is introduced. Visitors who use local AI must run and configure their own endpoint; browser/CORS restrictions may require using a local copy instead.
+**Hosted app:** [Open the live app](https://dragos-cloud.github.io/uipath-rpa-project-simulator/). The app name is RPA Project Simulator; the author has chosen to retain the existing repository and Pages URLs. GitHub Pages publishes the static repository root from `main`; `.nojekyll` disables Jekyll processing. No server-side project execution or shared AI service is introduced. Visitors who use local AI must run and configure their own endpoint; browser/CORS restrictions may require using a local copy instead.
 
 ### Primary users
 - **Business analysts** documenting or validating a TO-BE process.
@@ -37,7 +37,7 @@ The repository deliberately contains only the generic samples. Import a local co
 
 ### Public walkthrough
 
-The [historical 2:46 v0.61 walkthrough](docs/demo/README.md) demonstrates a synthetic, deliberately incomplete Customer Order Processing project, PDD/source review, local-AI responses and reusable outputs. It still shows/speaks the former app name and is preserved unchanged; refresh it before promoting the neutral brand. Video and subtitles remain attached to the [v0.61 release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61). No video regeneration or new speech credits are part of this local rename. Source-check examples are manual review observations, not claims of automated detection or runtime success.
+The [3:28 v0.63 walkthrough](docs/demo/README.md) presents the app for BAs, RPA developers, stakeholders and trainers, using a synthetic Customer Order Processing import. It distinguishes decision-route scenarios from exception injection, opens inspectors in app context, holds the PDD/code comparison for reading, and highlights controls. Actual local-model briefings, explanations and questions are followed by source-check cautions. Training examples come last. Source comparisons are manual review observations, not claims of automated defect detection or runtime success. The video and English subtitles are attached to the [v0.63 release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.63); the [v0.61 release](https://github.com/Dragos-cloud/uipath-rpa-project-simulator/releases/tag/v0.61) is preserved unchanged as an archive.
 
 ---
 
